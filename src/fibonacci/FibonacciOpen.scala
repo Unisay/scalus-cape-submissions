@@ -15,8 +15,7 @@ object FibonacciOpen:
 
     /** Iterative implementation with tail recursion */
     def fibonacci(n: BigInt): BigInt =
-        if n <= 1 then
-            if n == BigInt(0) then BigInt(0) else BigInt(1)
+        if n <= 1 then n
         else if n == BigInt(2) then BigInt(1)
         else
             def fibIter(a: BigInt, b: BigInt, count: BigInt): BigInt =

@@ -10,11 +10,7 @@
           (force [
             (force (builtin ifThenElse)) [
               (builtin lessThanEqualsInteger) n (con integer 1)
-            ] (delay (force [
-              (force (builtin ifThenElse)) [
-                (builtin equalsInteger) n (con integer 0)
-              ] (delay (con integer 0)) (delay (con integer 1))
-            ])) (delay (force [
+            ] (delay n) (delay (force [
               (force (builtin ifThenElse)) [
                 (builtin equalsInteger) n (con integer 2)
               ] (delay (con integer 1)) (delay [
