@@ -1,0 +1,38 @@
+{
+  "evaluations": [
+    {
+      "cpu_units": 165666060208,
+      "description": "Pre-applied fibonacci(25) should return 75025 with no input required",
+      "execution_result": "success",
+      "memory_units": 661266740,
+      "name": "fibonacci_25_computation"
+    }
+  ],
+  "execution_environment": {
+    "evaluator": "<evaluator-version>"
+  },
+  "measurements": {
+    "cpu_units": {
+      "maximum": 165666060208,
+      "median": 165666060208,
+      "minimum": 165666060208,
+      "sum": 165666060208,
+      "sum_negative": 0,
+      "sum_positive": 165666060208
+    },
+    "memory_units": {
+      "maximum": 661266740,
+      "median": 661266740,
+      "minimum": 661266740,
+      "sum": 661266740,
+      "sum_negative": 0,
+      "sum_positive": 661266740
+    },
+    "script_size_bytes": 96,
+    "term_size": 96
+  },
+  "scenario": "fibonacci",
+  "timestamp": "2025-10-07T13:50:00Z",
+  "version": "1.0.0",
+  "notes": "<optional notes>"
+}
