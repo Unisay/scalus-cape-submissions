@@ -31,7 +31,9 @@
             (pkgs.writeShellScriptBin "build-scalus" ''
               echo "Building all Scalus UPLC programs..."
               sbt "runMain fibonacci.compileFibonacciBase" && \
-              sbt "runMain fibonacci.compileFibonacciOpen"
+              sbt "runMain fibonacci.compileFibonacciOpen" && \
+              sbt "runMain factorial.compileFactorialBase" && \
+              sbt "runMain factorial.compileFactorialOpen"
             '')
           ];
 
