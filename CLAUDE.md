@@ -36,7 +36,7 @@ sbt compile
 
 **Generate UPLC programs:**
 ```bash
-# Compile all scenarios
+# Compile all submissions
 build-scalus
 
 # Or individually with full package path
@@ -70,12 +70,12 @@ object FibonacciBase:
 @main def compileFibonacciBase(): Unit =
     val program = compile(FibonacciBase.fibonacci25)
     val term = program.toUplc()
-    // Write to scenarios/fibonacci/base/fibonacci.uplc
+    // Write to submissions/fibonacci/base/fibonacci.uplc
 ```
 
 ### Output Organization
 
-**Pattern:** `scenarios/<scenario>/<mode>/fibonacci.uplc`
+**Pattern:** `submissions/<scenario>/<mode>/fibonacci.uplc`
 
 - `base/` - Base mode implementations (typically naive/unoptimized)
 - `open/` - Open mode implementations (optimized)
@@ -84,7 +84,7 @@ object FibonacciBase:
 
 1. Scala code annotated with `@Compile` is processed by the Scalus compiler plugin
 2. Scalus transforms Scala AST to Plutus IR
-3. Output is rendered as UPLC text and written to the scenarios directory
+3. Output is rendered as UPLC text and written to the submissions directory
 4. The compilation happens at Scala compile-time, producing a standalone UPLC program
 
 **Key insight:** The `fibonacci25` function is fully applied at compile-time with `n = 25`, producing a UPLC program that computes the result when executed.
@@ -109,7 +109,7 @@ object FibonacciBase:
 2. Add `@Compile` annotation to the object containing the logic
 3. Create a `@main` function to compile and write UPLC
 4. Update `build-scalus` command in `flake.nix` to include new main classes
-5. Create output directories: `scenarios/<scenario>/base/` and `scenarios/<scenario>/open/`
+5. Create output directories: `submissions/<scenario>/base/` and `submissions/<scenario>/open/`
 
 ## UPLC-CAPE Submission Format
 

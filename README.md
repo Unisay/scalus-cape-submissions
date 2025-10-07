@@ -22,7 +22,7 @@ nix develop
 │   └── fibonacci/         # Fibonacci scenario implementations
 │       ├── FibonacciBase.scala  # Base mode (naive recursive)
 │       └── FibonacciOpen.scala  # Open mode (optimized iterative)
-├── scenarios/             # UPLC-CAPE submission outputs
+├── submissions/           # UPLC-CAPE submission outputs
 │   └── fibonacci/         # Fibonacci submission directory
 │       ├── base/          # Base mode submission
 │       └── open/          # Open mode submission
@@ -31,7 +31,7 @@ nix develop
 
 ## Building
 
-Compile all scenarios:
+Compile all submissions:
 
 ```bash
 sbt compile
@@ -40,7 +40,7 @@ sbt compile
 Generate UPLC programs:
 
 ```bash
-# Build all scenarios (recommended)
+# Build all submissions (recommended)
 build-scalus
 
 # Or individually:

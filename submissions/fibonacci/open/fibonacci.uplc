@@ -4,11 +4,11 @@
   [
     (lam __z_combinator__
       [
-        (lam fibonacci.FibonacciOpen$.fibonacci
+        (lam fibonacci_FibonacciOpen__fibonacci
           [
-            (lam fibonacci.FibonacciOpen$.fibonacci25
-              [fibonacci.FibonacciOpen$.fibonacci25 (con unit ())]) (lam _
-              [fibonacci.FibonacciOpen$.fibonacci (con integer 25)])
+            (lam fibonacci_FibonacciOpen__fibonacci25
+              [fibonacci_FibonacciOpen__fibonacci25 (con unit ())]) (lam _
+              [fibonacci_FibonacciOpen__fibonacci (con integer 25)])
           ]) (lam n
           (force [
             (force (builtin ifThenElse)) [

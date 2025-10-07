@@ -4,13 +4,13 @@
   [
     (lam __z_combinator__
       [
-        (lam fibonacci.FibonacciBase$.fibonacci
+        (lam fibonacci_FibonacciBase__fibonacci
           [
-            (lam fibonacci.FibonacciBase$.fibonacci25
-              [fibonacci.FibonacciBase$.fibonacci25 (con unit ())]) (lam _
-              [fibonacci.FibonacciBase$.fibonacci (con integer 25)])
+            (lam fibonacci_FibonacciBase__fibonacci25
+              [fibonacci_FibonacciBase__fibonacci25 (con unit ())]) (lam _
+              [fibonacci_FibonacciBase__fibonacci (con integer 25)])
           ]) [
-          __z_combinator__ (lam fibonacci.FibonacciBase$.fibonacci
+          __z_combinator__ (lam fibonacci_FibonacciBase__fibonacci
             (lam n
               (force [
                 (force (builtin ifThenElse)) [
@@ -24,11 +24,11 @@
                     (builtin equalsInteger) n (con integer 2)
                   ] (delay (con integer 1)) (delay [
                     (builtin addInteger) [
-                      fibonacci.FibonacciBase$.fibonacci [
+                      fibonacci_FibonacciBase__fibonacci [
                         (builtin subtractInteger) n (con integer 1)
                       ]
                     ] [
-                      fibonacci.FibonacciBase$.fibonacci [
+                      fibonacci_FibonacciBase__fibonacci [
                         (builtin subtractInteger) n (con integer 2)
                       ]
                     ]
