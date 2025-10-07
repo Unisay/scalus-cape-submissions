@@ -26,9 +26,13 @@ object FibonacciBase:
     // Compile the FibonacciBase.fibonacci25 function to UPLC Program
     val program = compile(FibonacciBase.fibonacci25).toUplc().plutusV3
 
-    // Write to scenarios/fibonacci/base/fibonacci.uplc file
-    val uplcText = program.pretty.render(80)
-    val outputPath = Paths.get("scenarios/fibonacci/base/fibonacci.uplc")
+    // Write to submissions/fibonacci/base/fibonacci.uplc file
+    val uplcText = program.pretty
+      .render(80)
+      .replace(".", "_") // Sanitize all dots to underscores
+      .replace("$", "_") // Sanitize dollar signs to underscores
+      .replace("1_1_0", "1.1.0") // Restore version number
+    val outputPath = Paths.get("submissions/fibonacci/base/fibonacci.uplc")
     Files.createDirectories(outputPath.getParent)
     Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 
