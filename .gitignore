@@ -1,0 +1,27 @@
+# sbt
+target/
+project/target/
+project/project/
+
+# Scala
+*.class
+*.log
+.bsp/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.metals/
+.bloop/
+
+# Nix
+result
+result-*
+
+# direnv
+.direnv/
+
+# Local LLM content
+.local/
+.claude/settings.local.json
