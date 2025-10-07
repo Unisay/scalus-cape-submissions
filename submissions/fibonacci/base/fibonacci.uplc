@@ -5,11 +5,8 @@
     (lam __z_combinator__
       [
         (lam fibonacci_FibonacciBase__fibonacci
-          [
-            (lam fibonacci_FibonacciBase__fibonacci25
-              [fibonacci_FibonacciBase__fibonacci25 (con unit ())]) (lam _
-              [fibonacci_FibonacciBase__fibonacci (con integer 25)])
-          ]) [
+          (lam n
+            [fibonacci_FibonacciBase__fibonacci n])) [
           __z_combinator__ (lam fibonacci_FibonacciBase__fibonacci
             (lam n
               (force [

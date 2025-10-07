@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets
 /** UPLC-CAPE Fibonacci Open Mode Implementation
   *
   * Open mode uses optimized iterative implementation with tail recursion.
-  * This computes fibonacci(25) = 75025 as required by the UPLC-CAPE benchmark.
+  * Generates a lambda function that accepts n as a parameter.
   */
 @Compile
 object FibonacciOpen:
@@ -23,11 +23,9 @@ object FibonacciOpen:
                 if count <= BigInt(2) then b else fibIter(b, a + b, count - 1)
             fibIter(BigInt(1), BigInt(1), n)
 
-    def fibonacci25: BigInt = fibonacci(BigInt(25))
-
 @main def compileFibonacciOpen(): Unit =
-    // Compile the FibonacciOpen.fibonacci25 function to UPLC Program
-    val program = compile(FibonacciOpen.fibonacci25).toUplc().plutusV3
+    // Compile the parameterized fibonacci function to UPLC Program
+    val program = compile(FibonacciOpen.fibonacci).toUplc().plutusV3
 
     // Write to submissions/fibonacci/open/fibonacci.uplc file
     val uplcText = program.pretty

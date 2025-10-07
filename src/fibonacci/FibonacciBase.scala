@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets
 /** UPLC-CAPE Fibonacci Base Mode Implementation
   *
   * Base mode uses naive recursive implementation matching the mathematical definition.
-  * This computes fibonacci(25) = 75025 as required by the UPLC-CAPE benchmark.
+  * Generates a lambda function that accepts n as a parameter.
   */
 @Compile
 object FibonacciBase:
@@ -20,11 +20,9 @@ object FibonacciBase:
         else if n == BigInt(2) then BigInt(1)
         else fibonacci(n - 1) + fibonacci(n - 2)
 
-    def fibonacci25: BigInt = fibonacci(BigInt(25))
-
 @main def compileFibonacciBase(): Unit =
-    // Compile the FibonacciBase.fibonacci25 function to UPLC Program
-    val program = compile(FibonacciBase.fibonacci25).toUplc().plutusV3
+    // Compile the parameterized fibonacci function to UPLC Program
+    val program = compile(FibonacciBase.fibonacci).toUplc().plutusV3
 
     // Write to submissions/fibonacci/base/fibonacci.uplc file
     val uplcText = program.pretty
