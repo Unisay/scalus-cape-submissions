@@ -26,12 +26,11 @@ object FibonacciOpen:
     def fibonacci25: BigInt = fibonacci(BigInt(25))
 
 @main def compileFibonacciOpen(): Unit =
-    // Compile the FibonacciOpen.fibonacci25 function to UPLC
-    val program = compile(FibonacciOpen.fibonacci25)
-    val term = program.toUplc()
+    // Compile the FibonacciOpen.fibonacci25 function to UPLC Program
+    val program = compile(FibonacciOpen.fibonacci25).toUplc().plutusV3
 
     // Write to scenarios/fibonacci/open/fibonacci.uplc file
-    val uplcText = term.pretty.render(80)
+    val uplcText = program.pretty.render(80)
     val outputPath = Paths.get("scenarios/fibonacci/open/fibonacci.uplc")
     Files.createDirectories(outputPath.getParent)
     Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
