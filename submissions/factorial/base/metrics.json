@@ -1,0 +1,30 @@
+{
+  "evaluations": [],
+  "execution_environment": {
+    "evaluator": "<evaluator-version>"
+  },
+  "measurements": {
+    "cpu_units": {
+      "maximum": 0,
+      "median": 0,
+      "minimum": 0,
+      "sum": 0,
+      "sum_negative": 0,
+      "sum_positive": 0
+    },
+    "memory_units": {
+      "maximum": 0,
+      "median": 0,
+      "minimum": 0,
+      "sum": 0,
+      "sum_negative": 0,
+      "sum_positive": 0
+    },
+    "script_size_bytes": 853,
+    "term_size": 853
+  },
+  "scenario": "factorial",
+  "timestamp": "2025-10-07T13:37:37Z",
+  "version": "1.0.0",
+  "notes": "Placeholder metrics - actual measurements to be performed by UPLC-CAPE benchmark framework"
+}
