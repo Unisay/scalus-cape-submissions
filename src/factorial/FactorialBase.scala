@@ -20,7 +20,7 @@ object FactorialBase:
 
 @main def compileFactorialBase(): Unit =
   // Compile the parameterized factorial function to UPLC Program
-  val program = compile(FactorialBase.factorial).toUplc().plutusV3
+  val program = compile(FactorialBase.factorial).toUplcOptimized().plutusV3
 
   // Write to submissions/factorial/base/factorial.uplc file
   val uplcText = program.pretty

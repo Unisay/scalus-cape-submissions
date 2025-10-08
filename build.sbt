@@ -4,11 +4,11 @@ scalaVersion := "3.3.6"
 
 // Scalus dependencies
 libraryDependencies ++= Seq(
-  "org.scalus" %% "scalus" % "0.12.0"
+  "org.scalus" %% "scalus" % "0.12.1"
 )
 
 // Scalus compiler plugin
-addCompilerPlugin("org.scalus" %% "scalus-plugin" % "0.12.0")
+addCompilerPlugin("org.scalus" %% "scalus-plugin" % "0.12.1")
 
 // Source directories
 Compile / scalaSource := baseDirectory.value / "src"

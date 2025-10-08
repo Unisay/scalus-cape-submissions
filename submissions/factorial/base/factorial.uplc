@@ -2,15 +2,13 @@
   program
   1.1.0
   [
-    (lam __z_combinator__
+    (lam __builtin_IfThenElse
       [
-        (lam factorial_FactorialBase__factorial
-          (lam n
-            [factorial_FactorialBase__factorial n])) [
-          __z_combinator__ (lam factorial_FactorialBase__factorial
-            (lam n
-              (force [
-                (force (builtin ifThenElse)) [
+        (lam __z_combinator__
+          [
+            __z_combinator__ (lam factorial_FactorialBase__factorial
+              (lam n
+                (force (case (constr 0 [
                   (builtin lessThanEqualsInteger) n (con integer 0)
                 ] (delay (con integer 1)) (delay [
                   (builtin multiplyInteger) n [
@@ -18,14 +16,14 @@
                       (builtin subtractInteger) n (con integer 1)
                     ]
                   ]
-                ])
-              ])))
-        ]
-      ]) (lam ff
-      [
-        (lam xx
-          [ff (lam vv   [xx xx vv])]) (lam xx
-          [ff (lam vv   [xx xx vv])])
-      ])
+                ]))
+                  __builtin_IfThenElse))))
+          ]) (lam ff
+          [
+            (lam xx
+              [ff (lam vv   [xx xx vv])]) (lam xx
+              [ff (lam vv   [xx xx vv])])
+          ])
+      ]) (force (builtin ifThenElse))
   ]
 )

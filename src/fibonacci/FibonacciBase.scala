@@ -21,7 +21,7 @@ object FibonacciBase:
 
 @main def compileFibonacciBase(): Unit =
     // Compile the parameterized fibonacci function to UPLC Program
-    val program = compile(FibonacciBase.fibonacci).toUplc().plutusV3
+    val program = compile(FibonacciBase.fibonacci).toUplcOptimized().plutusV3
 
     // Write to submissions/fibonacci/base/fibonacci.uplc file
     val uplcText = program.pretty
