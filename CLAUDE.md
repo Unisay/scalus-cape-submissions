@@ -25,7 +25,7 @@ nix develop
 ```
 
 **Custom commands available in nix shell:**
-- `build-scalus` - Compiles all Scalus sources to UPLC (runs both compileFibonacciBase and compileFibonacciOpen)
+- `build-scalus` - Compiles all Scalus scenario submissions to UPLC
 
 ## Building
 
@@ -40,45 +40,49 @@ sbt compile
 build-scalus
 
 # Or individually with full package path
-sbt "runMain fibonacci.compileFibonacciBase"
-sbt "runMain fibonacci.compileFibonacciOpen"
+sbt "runMain fibonacci_naive_recursion.compileFibonacciNaiveRecursion"
+sbt "runMain fibonacci.compileFibonacci"
+sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion"
+sbt "runMain factorial.compileFactorial"
 ```
 
-**Important:** Main classes require the full package path (e.g., `fibonacci.compileFibonacciBase`, not just `compileFibonacciBase`).
+**Important:** Main classes require the full package path (e.g., `fibonacci_naive_recursion.compileFibonacciNaiveRecursion`, not just `compileFibonacciNaiveRecursion`).
 
 ## Architecture
 
 ### Source Organization
 
-**Pattern:** `src/<scenario>/<ScenarioName><Mode>.scala`
+**Pattern:** `src/<scenario_name>/<ScenarioName>.scala`
 
 Each scenario implementation:
-1. Has a package matching the scenario name (e.g., `package fibonacci`)
+1. Has a package matching the scenario name (e.g., `package fibonacci_naive_recursion`)
 2. Contains an `@Compile` annotated object with the core logic
 3. Defines a `@main` function to compile and write UPLC output
-4. Implements both Base and Open modes
+4. Generates a parameterized lambda function (not pre-applied)
 
 **Example structure:**
 ```scala
-package fibonacci
+package fibonacci_naive_recursion
 
 @Compile
-object FibonacciBase:
+object FibonacciNaiveRecursion:
     def fibonacci(n: BigInt): BigInt = ...
-    def fibonacci25: BigInt = fibonacci(BigInt(25))
 
-@main def compileFibonacciBase(): Unit =
-    val program = compile(FibonacciBase.fibonacci25)
+@main def compileFibonacciNaiveRecursion(): Unit =
+    val program = compile(FibonacciNaiveRecursion.fibonacci)
     val term = program.toUplc()
-    // Write to submissions/fibonacci/base/fibonacci.uplc
+    // Write to submissions/fibonacci_naive_recursion/fibonacci.uplc
 ```
 
 ### Output Organization
 
-**Pattern:** `submissions/<scenario>/<mode>/fibonacci.uplc`
+**Pattern:** `submissions/<scenario_name>/fibonacci.uplc`
 
-- `base/` - Base mode implementations (typically naive/unoptimized)
-- `open/` - Open mode implementations (optimized)
+Current scenarios:
+- `fibonacci_naive_recursion/` - Naive recursive fibonacci implementation
+- `fibonacci/` - Optimized fibonacci implementation
+- `factorial_naive_recursion/` - Naive recursive factorial implementation
+- `factorial/` - Optimized factorial implementation
 
 ### UPLC Compilation Process
 
@@ -87,34 +91,34 @@ object FibonacciBase:
 3. Output is rendered as UPLC text and written to the submissions directory
 4. The compilation happens at Scala compile-time, producing a standalone UPLC program
 
-**Key insight:** The `fibonacci25` function is fully applied at compile-time with `n = 25`, producing a UPLC program that computes the result when executed.
+**Key insight:** Functions are compiled as parameterized lambda functions that accept inputs (e.g., `\n -> ...`), not pre-applied with specific values. This allows the UPLC-CAPE benchmark framework to measure performance across different input values.
 
 ## Code Patterns
 
-### Base vs Open Mode
+### Scenario Types
 
-**Base Mode:**
-- Naive implementations matching mathematical definitions
+**Naive Implementations:**
+- Match mathematical definitions directly
 - No optimizations
 - Example: Naive recursive fibonacci (exponential time)
 
-**Open Mode:**
-- Optimized implementations
-- Tail recursion, iterative approaches
+**Optimized Implementations:**
+- Performance-focused implementations
+- May use tail recursion, iterative approaches, or manual UPLC construction
 - Example: Iterative fibonacci with tail recursion (linear time)
 
 ### Adding New Scenarios
 
-1. Create `src/<scenario>/<ScenarioName>Base.scala` and `src/<scenario>/<ScenarioName>Open.scala`
+1. Create `src/<scenario_name>/<ScenarioName>.scala`
 2. Add `@Compile` annotation to the object containing the logic
 3. Create a `@main` function to compile and write UPLC
-4. Update `build-scalus` command in `flake.nix` to include new main classes
-5. Create output directories: `submissions/<scenario>/base/` and `submissions/<scenario>/open/`
+4. Update `build-scalus` command in `flake.nix` to include new main class
+5. Create output directory: `submissions/<scenario_name>/`
 
 ## UPLC-CAPE Submission Format
 
-Each scenario submission directory should contain:
-- `fibonacci.uplc` - The compiled UPLC program
+Each scenario submission directory contains:
+- `fibonacci.uplc` or `factorial.uplc` - The compiled UPLC program (parameterized lambda function)
 - `README.md` - Implementation description
-- `metadata.json` - Compiler and implementation details (optional)
-- `metrics.json` - Performance measurements (optional)
+
+Note: Configuration and metadata files (config.json, metadata.json, metrics.json) are generated by the UPLC-CAPE framework and should not be committed to the repository.
