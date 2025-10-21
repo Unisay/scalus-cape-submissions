@@ -30,10 +30,10 @@
             # Custom build script
             (pkgs.writeShellScriptBin "build-scalus" ''
               echo "Building all Scalus UPLC programs..."
-              sbt "runMain fibonacci.compileFibonacciBase" && \
-              sbt "runMain fibonacci.compileFibonacciOpen" && \
-              sbt "runMain factorial.compileFactorialBase" && \
-              sbt "runMain factorial.compileFactorialOpen"
+              sbt "runMain fibonacci_naive_recursion.compileFibonacciNaiveRecursion" && \
+              sbt "runMain fibonacci.compileFibonacci" && \
+              sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion" && \
+              sbt "runMain factorial.compileFactorial"
             '')
           ];
 
