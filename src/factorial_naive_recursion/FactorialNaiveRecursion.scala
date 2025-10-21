@@ -1,38 +1,38 @@
-package factorial
+package factorial_naive_recursion
 
 import scalus.*
 import scalus.Compiler.compile
 import java.nio.file.{Files, Paths}
 import java.nio.charset.StandardCharsets
 
-/** UPLC-CAPE Factorial Base Mode Implementation
+/** UPLC-CAPE Factorial Naive Recursion Scenario
   *
-  * Base mode uses naive recursive implementation matching the mathematical definition.
+  * Naive recursive implementation matching the mathematical definition.
   * Generates a lambda function that accepts n as a parameter.
   */
 @Compile
-object FactorialBase:
+object FactorialNaiveRecursion:
 
   /** Naive recursive implementation */
   def factorial(n: BigInt): BigInt =
     if n <= 0 then BigInt(1)
     else n * factorial(n - 1)
 
-@main def compileFactorialBase(): Unit =
+@main def compileFactorialNaiveRecursion(): Unit =
   // Compile the parameterized factorial function to UPLC Program
-  val program = compile(FactorialBase.factorial).toUplcOptimized().plutusV3
+  val program = compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
 
-  // Write to submissions/factorial/base/factorial.uplc file
+  // Write to submissions/factorial_naive_recursion/factorial.uplc file
   val uplcText = program.pretty
     .render(80)
     .replace(".", "_") // Sanitize all dots to underscores
     .replace("$", "_") // Sanitize dollar signs to underscores
     .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("submissions/factorial/base/factorial.uplc")
+  val outputPath = Paths.get("submissions/factorial_naive_recursion/factorial.uplc")
   Files.createDirectories(outputPath.getParent)
   Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 
-  println(s"✓ Successfully compiled FactorialBase to factorial.uplc")
+  println(s"✓ Successfully compiled FactorialNaiveRecursion to factorial.uplc")
   println(s"  Output: ${outputPath.toAbsolutePath}")
   println(s"  Size: ${uplcText.length} bytes")
-  println(s"  Mode: Base (naive recursive)")
+  println(s"  Scenario: factorial_naive_recursion")

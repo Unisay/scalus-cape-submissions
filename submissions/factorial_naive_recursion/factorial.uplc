@@ -6,15 +6,15 @@
       [
         (lam __z_combinator__
           [
-            __z_combinator__ (lam factorial_FactorialBase__factorial
+            __z_combinator__
+            (lam factorial_naive_recursion_FactorialNaiveRecursion__factorial
               (lam n
                 (force (case (constr 0 [
                   (builtin lessThanEqualsInteger) n (con integer 0)
                 ] (delay (con integer 1)) (delay [
                   (builtin multiplyInteger) n [
-                    factorial_FactorialBase__factorial [
-                      (builtin subtractInteger) n (con integer 1)
-                    ]
+                    factorial_naive_recursion_FactorialNaiveRecursion__factorial
+                    [(builtin subtractInteger) n (con integer 1)]
                   ]
                 ]))
                   __builtin_IfThenElse))))

@@ -11,10 +11,10 @@ import scalus.uplc.transform.CaseConstrApply
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 
-/** UPLC-CAPE Fibonacci Open Mode Implementation
+/** UPLC-CAPE Fibonacci Scenario
   *
-  * Open mode uses optimized iterative implementation with tail recursion. Generates a lambda
-  * function that accepts n as a parameter.
+  * Optimized implementation using manual UPLC construction with tail recursion.
+  * Generates a lambda function that accepts n as a parameter.
   */
 
 extension (t: Term)
@@ -34,7 +34,7 @@ val versionedFibonacciTerm: Term =
 
     fib
 
-@main def compileFibonacciOpen(): Unit =
+@main def compileFibonacci(): Unit =
     val optimized = CaseConstrApply(versionedFibonacciTerm)
     val program = optimized.plutusV3
 
@@ -43,17 +43,17 @@ val versionedFibonacciTerm: Term =
     val result = applied.term.evaluateDebug
     println(s"Fibonacci(10) = $result") // Should print 55
 
-    // Write to submissions/fibonacci/open/fibonacci.uplc file
+    // Write to submissions/fibonacci/fibonacci.uplc file
     val uplcText = program.pretty
         .render(80)
         .replace(".", "_") // Sanitize all dots to underscores
         .replace("$", "_") // Sanitize dollar signs to underscores
         .replace("1_1_0", "1.1.0") // Restore version number
-    val outputPath = Paths.get("submissions/fibonacci/open/fibonacci.uplc")
+    val outputPath = Paths.get("submissions/fibonacci/fibonacci.uplc")
     Files.createDirectories(outputPath.getParent)
     Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 
-    println(s"✓ Successfully compiled FibonacciOpen to fibonacci.uplc")
+    println(s"✓ Successfully compiled Fibonacci to fibonacci.uplc")
     println(s"  Output: ${outputPath.toAbsolutePath}")
     println(s"  Size: ${uplcText.length} bytes")
-    println(s"  Mode: Open (iterative with tail recursion)")
+    println(s"  Scenario: fibonacci")

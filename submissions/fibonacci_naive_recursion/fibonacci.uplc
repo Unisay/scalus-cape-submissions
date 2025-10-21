@@ -6,7 +6,8 @@
       [
         (lam __z_combinator__
           [
-            __z_combinator__ (lam fibonacci_FibonacciBase__fibonacci
+            __z_combinator__
+            (lam fibonacci_naive_recursion_FibonacciNaiveRecursion__fibonacci
               (lam n
                 (force (case (constr 0 [
                   (builtin lessThanEqualsInteger) n (con integer 1)
@@ -14,13 +15,11 @@
                   (builtin equalsInteger) n (con integer 2)
                 ] (delay (con integer 1)) (delay [
                   (builtin addInteger) [
-                    fibonacci_FibonacciBase__fibonacci [
-                      (builtin subtractInteger) n (con integer 1)
-                    ]
+                    fibonacci_naive_recursion_FibonacciNaiveRecursion__fibonacci
+                    [(builtin subtractInteger) n (con integer 1)]
                   ] [
-                    fibonacci_FibonacciBase__fibonacci [
-                      (builtin subtractInteger) n (con integer 2)
-                    ]
+                    fibonacci_naive_recursion_FibonacciNaiveRecursion__fibonacci
+                    [(builtin subtractInteger) n (con integer 2)]
                   ]
                 ]))
                   __builtin_IfThenElse))))
