@@ -28,7 +28,7 @@ sbt "runMain fibonacci_naive_recursion.compileFibonacciNaiveRecursion"
 
 ## Output
 
-`submissions/fibonacci_naive_recursion/fibonacci.uplc`
+`src/fibonacci_naive_recursion/fibonacci.uplc`
 
 ## Notes
 

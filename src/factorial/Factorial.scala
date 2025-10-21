@@ -33,13 +33,13 @@ def versionedFactorialTerm: Term =
   val optimized = CaseConstrApply(versionedFactorialTerm)
   val program = optimized.plutusV3
 
-  // Write to submissions/factorial/factorial.uplc file
+  // Write to src/factorial/factorial.uplc file
   val uplcText = program.pretty
     .render(80)
     .replace(".", "_") // Sanitize all dots to underscores
     .replace("$", "_") // Sanitize dollar signs to underscores
     .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("submissions/factorial/factorial.uplc")
+  val outputPath = Paths.get("src/factorial/factorial.uplc")
   Files.createDirectories(outputPath.getParent)
   Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 

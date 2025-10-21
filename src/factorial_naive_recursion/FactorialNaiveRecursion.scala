@@ -22,13 +22,13 @@ object FactorialNaiveRecursion:
   // Compile the parameterized factorial function to UPLC Program
   val program = compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
 
-  // Write to submissions/factorial_naive_recursion/factorial.uplc file
+  // Write to src/factorial_naive_recursion/factorial.uplc file
   val uplcText = program.pretty
     .render(80)
     .replace(".", "_") // Sanitize all dots to underscores
     .replace("$", "_") // Sanitize dollar signs to underscores
     .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("submissions/factorial_naive_recursion/factorial.uplc")
+  val outputPath = Paths.get("src/factorial_naive_recursion/factorial.uplc")
   Files.createDirectories(outputPath.getParent)
   Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 

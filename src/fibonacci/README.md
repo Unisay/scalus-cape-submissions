@@ -29,7 +29,7 @@ sbt "runMain fibonacci.compileFibonacci"
 
 ## Output
 
-`submissions/fibonacci/fibonacci.uplc`
+`src/fibonacci/fibonacci.uplc`
 
 ## Notes
 

@@ -27,7 +27,7 @@ sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion"
 
 ## Output
 
-`submissions/factorial_naive_recursion/factorial.uplc`
+`src/factorial_naive_recursion/factorial.uplc`
 
 ## Notes
 

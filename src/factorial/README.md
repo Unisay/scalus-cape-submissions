@@ -29,7 +29,7 @@ sbt "runMain factorial.compileFactorial"
 
 ## Output
 
-`submissions/factorial/factorial.uplc`
+`src/factorial/factorial.uplc`
 
 ## Notes
 

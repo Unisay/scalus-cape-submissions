@@ -43,13 +43,13 @@ val versionedFibonacciTerm: Term =
     val result = applied.term.evaluateDebug
     println(s"Fibonacci(10) = $result") // Should print 55
 
-    // Write to submissions/fibonacci/fibonacci.uplc file
+    // Write to src/fibonacci/fibonacci.uplc file
     val uplcText = program.pretty
         .render(80)
         .replace(".", "_") // Sanitize all dots to underscores
         .replace("$", "_") // Sanitize dollar signs to underscores
         .replace("1_1_0", "1.1.0") // Restore version number
-    val outputPath = Paths.get("submissions/fibonacci/fibonacci.uplc")
+    val outputPath = Paths.get("src/fibonacci/fibonacci.uplc")
     Files.createDirectories(outputPath.getParent)
     Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
 
