@@ -49,7 +49,7 @@ val packedFibonacci = fibSeqByteString(26)
   // Compile Scalus function to lookup Fibonacci number from packed ByteString
   val fib = compile: (packedFibonacci: ByteString) =>
       (x: BigInt) =>
-          if x < BigInt(0) then x
+          if x <= BigInt(0) then x
           else byteStringToInteger(true, sliceByteString(x * 3, 3, packedFibonacci))
 
   // Apply the packed fibonacci ByteString
