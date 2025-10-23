@@ -2,7 +2,7 @@
   program
   1.1.0
   (lam x
-    (force (case (constr 0 [(builtin lessThanInteger) x (con integer 0)]
+    (force (case (constr 0 [(builtin lessThanEqualsInteger) x (con integer 0)]
     (delay x) (delay [
       (builtin byteStringToInteger) (con bool True) (case (constr 0 [
         (builtin multiplyInteger) x (con integer 3)
