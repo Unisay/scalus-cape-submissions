@@ -1,5 +1,6 @@
 package fibonacci_prepacked
 
+import common.Util
 import scalus.*
 import scalus.Compiler.*
 import scalus.builtin.Builtins.*
@@ -10,8 +11,6 @@ import scalus.uplc.Term.asTerm
 import scalus.uplc.eval.*
 import scalus.uplc.transform.{CaseConstrApply, Inliner}
 
-import java.nio.charset.StandardCharsets
-import java.nio.file.{Files, Paths}
 import scala.annotation.tailrec
 
 /** UPLC-CAPE Fibonacci Prepacked Scenario
@@ -59,22 +58,6 @@ val packedFibonacci = fibSeqByteString(26)
   val optimized = fibTerm |> Inliner.apply |> CaseConstrApply.apply
   val program = optimized.plutusV3
 
-  // Test the compiled program
   given PlutusVM = PlutusVM.makePlutusV3VM()
-  val testResult = (program $ 10.asTerm).term.evaluateDebug
-  println(s"✓ Fibonacci(10) = $testResult") // Should print 55
-
-  // Write to src/fibonacci_prepacked/fibonacci.uplc file
-  val uplcText = program.pretty
-      .render(80)
-      .replace(".", "_") // Sanitize all dots to underscores
-      .replace("$", "_") // Sanitize dollar signs to underscores
-      .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("src/fibonacci_prepacked/fibonacci.uplc")
-  Files.createDirectories(outputPath.getParent)
-  Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
-
-  println(s"✓ Successfully compiled FibonacciPrepacked to fibonacci.uplc")
-  println(s"  Output: ${outputPath.toAbsolutePath}")
-  println(s"  Size: ${uplcText.length} bytes")
-  println(s"  Scenario: fibonacci_prepacked")
+  Util.assertEvaluatesTo(program, input = 10, expected = 55)
+  Util.writeUplc("fibonacci_prepacked", "fibonacci.uplc", program.pretty.render(80))

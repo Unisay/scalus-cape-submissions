@@ -1,9 +1,9 @@
 package factorial_naive_recursion
 
+import common.Util
 import scalus.*
 import scalus.Compiler.compile
-import java.nio.file.{Files, Paths}
-import java.nio.charset.StandardCharsets
+import scalus.uplc.eval.PlutusVM
 
 /** UPLC-CAPE Factorial Naive Recursion Scenario
   *
@@ -22,17 +22,6 @@ object FactorialNaiveRecursion:
   // Compile the parameterized factorial function to UPLC Program
   val program = compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
 
-  // Write to src/factorial_naive_recursion/factorial.uplc file
-  val uplcText = program.pretty
-    .render(80)
-    .replace(".", "_") // Sanitize all dots to underscores
-    .replace("$", "_") // Sanitize dollar signs to underscores
-    .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("src/factorial_naive_recursion/factorial.uplc")
-  Files.createDirectories(outputPath.getParent)
-  Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
-
-  println(s"✓ Successfully compiled FactorialNaiveRecursion to factorial.uplc")
-  println(s"  Output: ${outputPath.toAbsolutePath}")
-  println(s"  Size: ${uplcText.length} bytes")
-  println(s"  Scenario: factorial_naive_recursion")
+  given PlutusVM = PlutusVM.makePlutusV3VM()
+  Util.assertEvaluatesTo(program, input = 10, expected = 3628800)
+  Util.writeUplc("factorial_naive_recursion", "factorial.uplc", program.pretty.render(80))

@@ -1,7 +1,6 @@
 # Factorial Naive Recursion
 
 **Scenario:** factorial_naive_recursion
-**Compiler:** Scalus 0.12.0
 
 ## Implementation
 

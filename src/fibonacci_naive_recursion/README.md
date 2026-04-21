@@ -1,7 +1,6 @@
 # Fibonacci Naive Recursion
 
 **Scenario:** fibonacci_naive_recursion
-**Compiler:** Scalus 0.12.0
 
 ## Implementation
 

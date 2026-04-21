@@ -1,13 +1,12 @@
 package factorial
 
+import common.Util
 import scalus.*
 import scalus.uplc.DefaultFun.*
 import scalus.uplc.Term
 import scalus.uplc.Term.*
+import scalus.uplc.eval.PlutusVM
 import scalus.uplc.transform.CaseConstrApply
-
-import java.nio.charset.StandardCharsets
-import java.nio.file.{Files, Paths}
 
 /** UPLC-CAPE Factorial Scenario
   *
@@ -18,11 +17,11 @@ import java.nio.file.{Files, Paths}
 def versionedFactorialTerm: Term =
   import scalus.uplc.TermDSL.given
   // pfix' implementation
-  def pfix(f: Term => Term) = λλ("r") { r => r $ r } $ λλ("r") { r => f(r $ r) }
+  def pfix(f: Term => Term) = Term.λ { r => r $ r } $ Term.λ { r => f(r $ r) }
 
   // pfactorial using pfix'
   val factorial = pfix: r =>
-    λλ("x"): x =>
+    Term.λ: x =>
       !(!IfThenElse $ (LessThanEqualsInteger $ x $ 0) $
         ~1.asTerm $
         ~(MultiplyInteger $ x $ (r $ (SubtractInteger $ x $ 1))))
@@ -33,17 +32,6 @@ def versionedFactorialTerm: Term =
   val optimized = CaseConstrApply(versionedFactorialTerm)
   val program = optimized.plutusV3
 
-  // Write to src/factorial/factorial.uplc file
-  val uplcText = program.pretty
-    .render(80)
-    .replace(".", "_") // Sanitize all dots to underscores
-    .replace("$", "_") // Sanitize dollar signs to underscores
-    .replace("1_1_0", "1.1.0") // Restore version number
-  val outputPath = Paths.get("src/factorial/factorial.uplc")
-  Files.createDirectories(outputPath.getParent)
-  Files.write(outputPath, uplcText.getBytes(StandardCharsets.UTF_8))
-
-  println(s"✓ Successfully compiled Factorial to factorial.uplc")
-  println(s"  Output: ${outputPath.toAbsolutePath}")
-  println(s"  Size: ${uplcText.length} bytes")
-  println(s"  Scenario: factorial")
+  given PlutusVM = PlutusVM.makePlutusV3VM()
+  Util.assertEvaluatesTo(program, input = 10, expected = 3628800)
+  Util.writeUplc("factorial", "factorial.uplc", program.pretty.render(80))
