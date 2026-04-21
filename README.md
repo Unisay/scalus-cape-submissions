@@ -78,7 +78,6 @@ Hand-crafted UPLC using fixed-point combinator with tail recursion.
 
 - **Build:** `sbt "runMain fibonacci.compileFibonacci"`
 - **Output:** `src/fibonacci/fibonacci.uplc`
-- **Performance:** CPU 115.87, Memory 0.43 (for fib(10))
 
 #### `fibonacci_prepacked/` - Pre-packed ByteString
 
@@ -86,7 +85,6 @@ Pre-computed lookup table stored as ByteString constant (O(1) lookup).
 
 - **Build:** `sbt "runMain fibonacci_prepacked.compileFibonacciPrepacked"`
 - **Output:** `src/fibonacci_prepacked/fibonacci.uplc`
-- **Performance:** CPU 1.75, Memory 0.003 (for fib(10)) - **66x faster!**
 - **Range:** Supports n ∈ [0, 25]
 
 #### `fibonacci_naive_recursion/` - Naive Recursive

@@ -1,7 +1,6 @@
 # Fibonacci
 
 **Scenario:** fibonacci
-**Compiler:** Scalus 0.12.0
 
 ## Implementation
 
@@ -9,7 +8,7 @@ Optimized implementation using manual UPLC construction with pfix (Y-combinator)
 
 ```scala
 val fib = pfix: r =>
-    λλ("x"): x =>
+    Term.λ: x =>
         !(!IfThenElse $ x <= 1 $
             ~x $
             ~((r $ x - 1) + (r $ x - 2)))

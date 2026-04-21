@@ -1,7 +1,6 @@
 # Factorial
 
 **Scenario:** factorial
-**Compiler:** Scalus 0.12.0
 
 ## Implementation
 
@@ -9,7 +8,7 @@ Optimized implementation using manual UPLC construction with pfix (Y-combinator)
 
 ```scala
 val factorial = pfix: r =>
-    λλ("x"): x =>
+    Term.λ: x =>
         !(!IfThenElse $ (LessThanEqualsInteger $ x $ 0) $
             ~1.asTerm $
             ~(MultiplyInteger $ x $ (r $ (SubtractInteger $ x $ 1))))
