@@ -20,7 +20,9 @@ object FactorialNaiveRecursion:
 
 @main def compileFactorialNaiveRecursion(): Unit =
   // Compile the parameterized factorial function to UPLC Program
-  val program = compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
+  val program = common.Renamer.rename(
+    compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
+  )
 
   given PlutusVM = PlutusVM.makePlutusV3VM()
   Util.assertEvaluatesTo(program, input = 10, expected = 3628800)

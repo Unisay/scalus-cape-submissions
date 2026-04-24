@@ -30,7 +30,7 @@ def versionedFactorialTerm: Term =
 
 @main def compileFactorial(): Unit =
   val optimized = CaseConstrApply(versionedFactorialTerm)
-  val program = optimized.plutusV3
+  val program = common.Renamer.rename(optimized.plutusV3)
 
   given PlutusVM = PlutusVM.makePlutusV3VM()
   Util.assertEvaluatesTo(program, input = 10, expected = 3628800)

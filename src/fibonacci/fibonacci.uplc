@@ -1,7 +1,7 @@
-(program 1.1.0 [(lam r [r r]) (lam r
-      (lam x
-        (force (case (constr 0 [(builtin lessThanEqualsInteger) x
-              (con integer 1)] (delay x) (delay [(builtin addInteger) [r r
-                [(builtin subtractInteger) x (con integer 1)]] [r r
-                [(builtin subtractInteger) x
+(program 1.1.0 [(lam a [a a]) (lam a
+      (lam b
+        (force (case (constr 0 [(builtin lessThanEqualsInteger) b
+              (con integer 1)] (delay b) (delay [(builtin addInteger) [a a
+                [(builtin subtractInteger) b (con integer 1)]] [a a
+                [(builtin subtractInteger) b
                   (con integer 2)]]])) (force (builtin ifThenElse))))))])

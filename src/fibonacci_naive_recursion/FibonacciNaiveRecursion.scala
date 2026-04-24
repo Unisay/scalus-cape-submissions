@@ -22,7 +22,9 @@ object FibonacciNaiveRecursion:
 
 @main def compileFibonacciNaiveRecursion(): Unit =
     // Compile the parameterized fibonacci function to UPLC Program
-    val program = compile(FibonacciNaiveRecursion.fibonacci).toUplcOptimized().plutusV3
+    val program = common.Renamer.rename(
+        compile(FibonacciNaiveRecursion.fibonacci).toUplcOptimized().plutusV3
+    )
 
     given PlutusVM = PlutusVM.makePlutusV3VM()
     Util.assertEvaluatesTo(program, input = 10, expected = 55)
