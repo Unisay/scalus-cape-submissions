@@ -34,7 +34,8 @@
               sbt "runMain fibonacci.compileFibonacci" && \
               sbt "runMain fibonacci_prepacked.compileFibonacciPrepacked" && \
               sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion" && \
-              sbt "runMain factorial.compileFactorial"
+              sbt "runMain factorial.compileFactorial" && \
+              sbt "runMain htlc.compileHtlc"
             '')
           ];
 
