@@ -129,5 +129,5 @@ enum HTLCRedeemer derives FromData, ToData:
             case None    => fail(OwnInputNotFound)
 
 @main def compileHtlc(): Unit =
-    val program = compile(HtlcValidator.validate).toUplcOptimized().plutusV3
+    val program = compile(HtlcValidator.validate).toUplc().plutusV3
     Util.writeUplc("htlc", "htlc.uplc", program.pretty.render(80))
