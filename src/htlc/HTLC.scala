@@ -129,8 +129,6 @@ enum HTLCRedeemer derives FromData, ToData:
             case None    => fail(OwnInputNotFound)
 
 @main def compileHtlc(): Unit =
-    val program = compile(HtlcValidator.validate).toUplc().plutusV3
-    // plutus-core 1.45 Lex.decimal stops at 'r', so NAME-NNNNrMMMM splits
-    // wrong (reads only NNNN, leaves rMMMM as garbage). Replace '-' with '_'.
-    val uplcText = program.pretty.render(80).replaceAll("""(\w)-(\d+)(r\d+)""", "$1_$2$3")
-    Util.writeUplc("htlc", "htlc.uplc", uplcText)
+    val raw = compile(HtlcValidator.validate).toUplcOptimized().plutusV3
+    val program = common.Renamer.rename(raw)
+    Util.writeUplc("htlc", "htlc.uplc", program.pretty.render(80))
