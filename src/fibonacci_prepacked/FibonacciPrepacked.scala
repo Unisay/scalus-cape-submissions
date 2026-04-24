@@ -56,7 +56,7 @@ val packedFibonacci = fibSeqByteString(26)
 
   // Optimize the term by inlining the constant ByteString
   val optimized = fibTerm |> Inliner.apply |> CaseConstrApply.apply
-  val program = optimized.plutusV3
+  val program = common.Renamer.rename(optimized.plutusV3)
 
   given PlutusVM = PlutusVM.makePlutusV3VM()
   Util.assertEvaluatesTo(program, input = 10, expected = 55)

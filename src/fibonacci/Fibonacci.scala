@@ -34,7 +34,7 @@ val versionedFibonacciTerm: Term =
 
 @main def compileFibonacci(): Unit =
     val optimized = CaseConstrApply(versionedFibonacciTerm)
-    val program = optimized.plutusV3
+    val program = common.Renamer.rename(optimized.plutusV3)
 
     given PlutusVM = PlutusVM.makePlutusV3VM()
     Util.assertEvaluatesTo(program, input = 10, expected = 55)
