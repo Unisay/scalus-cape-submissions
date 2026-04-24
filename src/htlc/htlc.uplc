@@ -21,9 +21,9 @@
                                                                                   [(lam htlc_HtlcValidator__lowerBoundInclusive237
                                                                                       [(lam htlc_HtlcValidator__validateRefund248
                                                                                           [(lam htlc_HtlcValidator__validate283
-                                                                                              (lam scData-30464284
+                                                                                              (lam scData-30465284
                                                                                                 [htlc_HtlcValidator__validate283
-                                                                                                  scData-30464284]))
+                                                                                                  scData-30465284]))
                                                                                             (lam scData-15677249
                                                                                               [(lam ctx-15678250
                                                                                                   [(lam _match_scrutinee253
@@ -526,7 +526,7 @@
                                       [(force (builtin headList))
                                         addr-2769180]]])]) (lam self-30547764
                               (lam pubKeyHash-30547865
-                                [(lam pubKeyHash-305478r71
+                                [(lam pubKeyHash_305478r71
                                     (lam xIn72
                                       [(lam xIn66
                                           (lam xIn67
@@ -543,7 +543,7 @@
                                                                 [(force (builtin tailList))
                                                                   self-30547764]]]]]]]]]]
                                               xIn66 xIn67]))
-                                        pubKeyHash-305478r71 (lam xIn73
+                                        pubKeyHash_305478r71 (lam xIn73
                                           [(lam xIn73r74
                                               (lam xIn75
                                                 [xIn72 xIn73r74
