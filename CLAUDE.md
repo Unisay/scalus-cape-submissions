@@ -47,6 +47,7 @@ sbt "runMain fibonacci.compileFibonacci"
 sbt "runMain fibonacci_prepacked.compileFibonacciPrepacked"
 sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion"
 sbt "runMain factorial.compileFactorial"
+sbt "runMain htlc.compileHtlc"
 ```
 
 **Important:** Main classes require the full package path (e.g., `fibonacci_naive_recursion.compileFibonacciNaiveRecursion`, not just `compileFibonacciNaiveRecursion`).
@@ -94,6 +95,9 @@ All scenarios are located in `src/`:
 **Factorial:**
 - `factorial/` - Optimized factorial implementation
 - `factorial_naive_recursion/` - Naive recursive factorial implementation
+
+**HTLC (Hashed Time-Locked Contract):**
+- `htlc/` - Spending validator (`Data -> Unit`) with `Claim(preimage)` / `Refund` redeemer. Uses the production-safe validity-range convention (claim checks upper bound of `txInfoValidRange`; refund checks lower bound).
 
 ### UPLC Compilation Process
 
