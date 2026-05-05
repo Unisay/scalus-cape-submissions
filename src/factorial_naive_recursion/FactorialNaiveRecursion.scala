@@ -3,6 +3,7 @@ package factorial_naive_recursion
 import common.Util
 import scalus.*
 import scalus.Compiler.compile
+import scalus.compiler.Options
 import scalus.uplc.eval.PlutusVM
 
 /** UPLC-CAPE Factorial Naive Recursion Scenario
@@ -21,7 +22,7 @@ object FactorialNaiveRecursion:
 @main def compileFactorialNaiveRecursion(): Unit =
   // Compile the parameterized factorial function to UPLC Program
   val program = common.Renamer.rename(
-    compile(FactorialNaiveRecursion.factorial).toUplcOptimized().plutusV3
+    compile(FactorialNaiveRecursion.factorial).toUplcOptimized(using Options.release)().plutusV3
   )
 
   given PlutusVM = PlutusVM.makePlutusV3VM()

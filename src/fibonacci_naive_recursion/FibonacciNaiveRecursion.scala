@@ -3,6 +3,7 @@ package fibonacci_naive_recursion
 import common.Util
 import scalus.*
 import scalus.Compiler.compile
+import scalus.compiler.Options
 import scalus.uplc.Term.asTerm
 import scalus.uplc.eval.*
 
@@ -23,7 +24,7 @@ object FibonacciNaiveRecursion:
 @main def compileFibonacciNaiveRecursion(): Unit =
     // Compile the parameterized fibonacci function to UPLC Program
     val program = common.Renamer.rename(
-        compile(FibonacciNaiveRecursion.fibonacci).toUplcOptimized().plutusV3
+        compile(FibonacciNaiveRecursion.fibonacci).toUplcOptimized(using Options.release)().plutusV3
     )
 
     given PlutusVM = PlutusVM.makePlutusV3VM()

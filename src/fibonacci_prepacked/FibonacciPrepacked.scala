@@ -3,6 +3,7 @@ package fibonacci_prepacked
 import common.Util
 import scalus.*
 import scalus.Compiler.*
+import scalus.compiler.Options
 import scalus.builtin.Builtins.*
 import scalus.builtin.ByteString
 import scalus.builtin.ByteString.given
@@ -52,7 +53,7 @@ val packedFibonacci = fibSeqByteString(26)
           else byteStringToInteger(true, sliceByteString(x * 3, 3, packedFibonacci))
 
   // Apply the packed fibonacci ByteString
-  val fibTerm = fib.toUplc() $ packedFibonacci.asTerm
+  val fibTerm = fib.toUplc(using Options.release)() $ packedFibonacci.asTerm
 
   // Optimize the term by inlining the constant ByteString
   val optimized = fibTerm |> Inliner.apply |> CaseConstrApply.apply
