@@ -2,8 +2,7 @@ package fibonacci_naive_recursion
 
 import common.Util
 import scalus.*
-import scalus.Compiler.compile
-import scalus.compiler.Options
+import scalus.compiler.{Compile, compile, Options}
 import scalus.uplc.Term.asTerm
 import scalus.uplc.eval.*
 

@@ -2,11 +2,11 @@ package fibonacci_prepacked
 
 import common.Util
 import scalus.*
-import scalus.Compiler.*
+import scalus.compiler.compile
 import scalus.compiler.Options
-import scalus.builtin.Builtins.*
-import scalus.builtin.ByteString
-import scalus.builtin.ByteString.given
+import scalus.uplc.builtin.Builtins.*
+import scalus.uplc.builtin.ByteString
+import scalus.uplc.builtin.ByteString.given
 import scalus.uplc.*
 import scalus.uplc.Term.asTerm
 import scalus.uplc.eval.*

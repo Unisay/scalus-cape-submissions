@@ -2,9 +2,9 @@ package htlc
 
 import common.Util
 import scalus.*
-import scalus.Compiler.compile
-import scalus.builtin.*
-import scalus.builtin.Builtins.sha2_256
+import scalus.compiler.{Compile, compile, Options}
+import scalus.uplc.builtin.*
+import scalus.uplc.builtin.Builtins.sha2_256
 import scalus.cardano.onchain.plutus.prelude.*
 import scalus.cardano.onchain.plutus.prelude.Option.{Some, None}
 import scalus.cardano.onchain.plutus.v1.{
@@ -15,8 +15,6 @@ import scalus.cardano.onchain.plutus.v1.{
     PubKeyHash
 }
 import scalus.cardano.onchain.plutus.v3.*
-import scalus.compiler.Options
-import scalus.prelude.{fail, require}
 
 /** UPLC-CAPE HTLC Scenario
   *
