@@ -15,6 +15,7 @@ import scalus.cardano.onchain.plutus.v1.{
     PubKeyHash
 }
 import scalus.cardano.onchain.plutus.v3.*
+import scalus.compiler.Options
 import scalus.prelude.{fail, require}
 
 /** UPLC-CAPE HTLC Scenario
@@ -129,6 +130,6 @@ enum HTLCRedeemer derives FromData, ToData:
             case None    => fail(OwnInputNotFound)
 
 @main def compileHtlc(): Unit =
-    val raw = compile(HtlcValidator.validate).toUplcOptimized().plutusV3
+    val raw = compile(HtlcValidator.validate).toUplcOptimized(using Options.release)().plutusV3
     val program = common.Renamer.rename(raw)
     Util.writeUplc("htlc", "htlc.uplc", program.pretty.render(80))
