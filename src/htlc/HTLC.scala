@@ -2,6 +2,7 @@ package htlc
 
 import common.Util
 import scalus.*
+import scalus.cardano.ledger.MajorProtocolVersion
 import scalus.compiler.{Compile, compile, Options}
 import scalus.uplc.builtin.*
 import scalus.uplc.builtin.Builtins.sha2_256
@@ -128,6 +129,19 @@ enum HTLCRedeemer derives FromData, ToData:
             case None    => fail(OwnInputNotFound)
 
 @main def compileHtlc(): Unit =
-    val raw = compile(HtlcValidator.validate).toUplcOptimized(using Options.release)().plutusV3
-    val program = common.Renamer.rename(raw)
+    val sir = compile(HtlcValidator.validate)
+
+    val program = common.Renamer.rename(
+      sir.toUplcOptimized(using Options.release)().plutusV3
+    )
     Util.writeUplc("htlc", "htlc.uplc", program.pretty.render(80))
+
+    // vanRossem preview build (case-on-builtins, batch6, dropList)
+    val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
+    val programVR = common.Renamer.rename(
+      sir.toUplcOptimized(using vanRossem)().plutusV3
+    )
+    Util.writeUplc("htlc", "htlc-vanrossem.uplc", programVR.pretty.render(80))
+
+    // Sanity-eval both variants on Claim and Refund redeemers against minimal ScriptContexts.
+    HtlcHarness.checkBoth(program, programVR)
