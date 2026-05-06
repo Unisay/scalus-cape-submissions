@@ -2,6 +2,7 @@ package fibonacci_prepacked
 
 import common.Util
 import scalus.*
+import scalus.cardano.ledger.MajorProtocolVersion
 import scalus.compiler.compile
 import scalus.compiler.Options
 import scalus.uplc.builtin.Builtins.*
@@ -52,13 +53,25 @@ val packedFibonacci = fibSeqByteString(26)
           if x <= BigInt(0) then x
           else byteStringToInteger(true, sliceByteString(x * 3, 3, packedFibonacci))
 
-  // Apply the packed fibonacci ByteString
-  val fibTerm = fib.toUplc(using Options.release)() $ packedFibonacci.asTerm
+  def buildProgram(opts: Options): Program =
+      val term      = fib.toUplc(using opts)() $ packedFibonacci.asTerm
+      val optimized = term |> Inliner.apply |> CaseConstrApply.apply
+      common.Renamer.rename(optimized.plutusV3)
 
-  // Optimize the term by inlining the constant ByteString
-  val optimized = fibTerm |> Inliner.apply |> CaseConstrApply.apply
-  val program = common.Renamer.rename(optimized.plutusV3)
-
-  given PlutusVM = PlutusVM.makePlutusV3VM()
-  Util.assertEvaluatesTo(program, input = 10, expected = 55)
+  val program = buildProgram(Options.release)
+  locally:
+      given PlutusVM = PlutusVM.makePlutusV3VM()
+      Util.assertEvaluatesTo(program, input = 10, expected = 55)
   Util.writeUplc("fibonacci_prepacked", "fibonacci.uplc", program.pretty.render(80))
+
+  // vanRossem preview build (case-on-builtins, batch6, dropList)
+  val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
+  val programVR = buildProgram(vanRossem)
+  locally:
+      given PlutusVM = PlutusVM.makePlutusV3VM(MajorProtocolVersion.vanRossemPV)
+      Util.assertEvaluatesTo(programVR, input = 10, expected = 55)
+  Util.writeUplc(
+    "fibonacci_prepacked",
+    "fibonacci-vanrossem.uplc",
+    programVR.pretty.render(80)
+  )
