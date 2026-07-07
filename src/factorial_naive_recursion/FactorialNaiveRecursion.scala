@@ -37,6 +37,6 @@ object FactorialNaiveRecursion:
     Util.assertEvaluatesTo(programVR, input = 10, expected = 3628800)
   Util.writeUplc(
     "factorial_naive_recursion",
-    "factorial-vanrossem.uplc",
+    "factorial-preview.uplc",
     programVR.pretty.render(80)
   )

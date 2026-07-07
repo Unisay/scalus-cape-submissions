@@ -72,6 +72,6 @@ val packedFibonacci = fibSeqByteString(26)
       Util.assertEvaluatesTo(programVR, input = 10, expected = 55)
   Util.writeUplc(
     "fibonacci_prepacked",
-    "fibonacci-vanrossem.uplc",
+    "fibonacci-preview.uplc",
     programVR.pretty.render(80)
   )
