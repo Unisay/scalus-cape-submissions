@@ -7,7 +7,6 @@ import scalus.compiler.{compile, Compile, Options}
 import scalus.cardano.onchain.plutus.prelude.*
 import scalus.cardano.onchain.plutus.prelude.Option.*
 import scalus.cardano.onchain.plutus.v1.IntervalBoundType
-import scalus.cardano.onchain.plutus.v2
 import scalus.cardano.onchain.plutus.v2.OutputDatum
 import scalus.cardano.onchain.plutus.v3.*
 import scalus.uplc.builtin.ByteString.*
@@ -186,7 +185,7 @@ object TwoPartyEscrowValidator {
         go(inputs)
     }
 
-    def findOutputsByCredential(outputs: List[TxOut], cred: Credential): List[v2.TxOut] =
+    def findOutputsByCredential(outputs: List[TxOut], cred: Credential): List[TxOut] =
         outputs.filter(_.address.credential.toData == cred.toData)
 
     def requireSignedBy(
