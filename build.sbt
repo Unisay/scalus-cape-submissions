@@ -2,7 +2,7 @@ name := "scalus-cape-submissions"
 version := "0.1.0"
 scalaVersion := "3.3.7"
 
-val scalusVersion = "0.17.0"
+val scalusVersion = "0.18.2"
 
 // Scalus dependencies
 libraryDependencies ++= Seq(
