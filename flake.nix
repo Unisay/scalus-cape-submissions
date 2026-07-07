@@ -36,7 +36,8 @@
               sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion" && \
               sbt "runMain factorial.compileFactorial" && \
               sbt "runMain htlc.compileHtlc" && \
-              sbt "runMain two_party_escrow.compileTwoPartyEscrow"
+              sbt "runMain two_party_escrow.compileTwoPartyEscrow" && \
+              sbt "runMain linear_vesting.compileLinearVesting"
             '')
           ];
 

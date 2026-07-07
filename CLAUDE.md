@@ -49,6 +49,7 @@ sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion"
 sbt "runMain factorial.compileFactorial"
 sbt "runMain htlc.compileHtlc"
 sbt "runMain two_party_escrow.compileTwoPartyEscrow"
+sbt "runMain linear_vesting.compileLinearVesting"
 ```
 
 **Important:** Main classes require the full package path (e.g., `fibonacci_naive_recursion.compileFibonacciNaiveRecursion`, not just `compileFibonacciNaiveRecursion`).
@@ -102,6 +103,9 @@ All scenarios are located in `src/`:
 
 **Two-Party Escrow:**
 - `two_party_escrow/` - Spending validator (`Data -> Unit`) with a `Deposited -> Accepted | Refunded` state machine. Raw-integer redeemer (0=Deposit, 1=Accept, 2=Refund); buyer/seller keys, 75 ADA price and 1800s deadline baked in. Deposit records the (finite) upper bound of `txInfoValidRange` as `depositTime`; refund requires the lower bound strictly after `depositTime + 1800`.
+
+**Linear Vesting:**
+- `linear_vesting/` - Spending validator (`Data -> Unit`) releasing a native asset on an installment schedule. Nullary-constructor redeemer (`Constr 0 []`=PartialUnlock, `Constr 1 []`=FullUnlock); all parameters in the 7-field datum. Partial unlock enforces the `divCeil` schedule, datum preservation and a single-script-input anti-double-satisfaction guard, taking the first (most-recently-added) script output as the continuing UTxO.
 
 ### Verification and measurement
 
