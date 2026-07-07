@@ -39,6 +39,6 @@ object FibonacciNaiveRecursion:
         Util.assertEvaluatesTo(programVR, input = 10, expected = 55)
     Util.writeUplc(
       "fibonacci_naive_recursion",
-      "fibonacci-vanrossem.uplc",
+      "fibonacci-preview.uplc",
       programVR.pretty.render(80)
     )

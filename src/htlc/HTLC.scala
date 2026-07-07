@@ -141,7 +141,7 @@ enum HTLCRedeemer derives FromData, ToData:
     val programVR = common.Renamer.rename(
       sir.toUplcOptimized(using vanRossem)().plutusV3
     )
-    Util.writeUplc("htlc", "htlc-vanrossem.uplc", programVR.pretty.render(80))
+    Util.writeUplc("htlc", "htlc-preview.uplc", programVR.pretty.render(80))
 
     // Sanity-eval both variants on Claim and Refund redeemers against minimal ScriptContexts.
     HtlcHarness.checkBoth(program, programVR)
