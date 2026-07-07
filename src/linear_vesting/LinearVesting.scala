@@ -91,7 +91,9 @@ object LinearVestingValidator {
         )
 
         // The continuing output is the first (most-recently-added) script output.
-        val continuing = txInfo.findOwnOutputsByCredential(ownCredential).head
+        val continuing = txInfo.findOwnOutputsByCredential(ownCredential) match
+            case List.Cons(head, _) => head
+            case List.Nil           => fail("Missing continuing script output")
 
         val cs = datum.vestingAsset.currencySymbol
         val tn = datum.vestingAsset.tokenName
