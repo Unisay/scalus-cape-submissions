@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repository contains UPLC-CAPE benchmark submissions implemented using Scalus, a Scala-to-Plutus compiler. The project compiles Scala code to UPLC (Untyped Plutus Core) for Cardano blockchain execution.
 
 **Key Technologies:**
-- Scalus 0.17.0 - Scala-to-Plutus compiler (library + compiler plugin)
+- Scalus 0.18.2 - Scala-to-Plutus compiler (library + compiler plugin)
 - Scala 3.3.7
 - sbt 1.10.1
 - Plutus Core 1.1.0 target
@@ -48,6 +48,7 @@ sbt "runMain fibonacci_prepacked.compileFibonacciPrepacked"
 sbt "runMain factorial_naive_recursion.compileFactorialNaiveRecursion"
 sbt "runMain factorial.compileFactorial"
 sbt "runMain htlc.compileHtlc"
+sbt "runMain two_party_escrow.compileTwoPartyEscrow"
 ```
 
 **Important:** Main classes require the full package path (e.g., `fibonacci_naive_recursion.compileFibonacciNaiveRecursion`, not just `compileFibonacciNaiveRecursion`).
@@ -98,6 +99,13 @@ All scenarios are located in `src/`:
 
 **HTLC (Hashed Time-Locked Contract):**
 - `htlc/` - Spending validator (`Data -> Unit`) with `Claim(preimage)` / `Refund` redeemer. Uses the production-safe validity-range convention (claim checks upper bound of `txInfoValidRange`; refund checks lower bound).
+
+**Two-Party Escrow:**
+- `two_party_escrow/` - Spending validator (`Data -> Unit`) with a `Deposited -> Accepted | Refunded` state machine. Raw-integer redeemer (0=Deposit, 1=Accept, 2=Refund); buyer/seller keys, 75 ADA price and 1800s deadline baked in. Deposit records the (finite) upper bound of `txInfoValidRange` as `depositTime`; refund requires the lower bound strictly after `depositTime + 1800`.
+
+### Verification and measurement
+
+Correctness (all `measurements` accept, all `checks` reject) and metrics (CPU/memory/script size) are measured by the UPLC-CAPE framework, not locally: it evaluates the compiled `.uplc` against `scenarios/<scenario>/cape-tests.json` with the canonical evaluator. Do not build a local measurer.
 
 ### UPLC Compilation Process
 
