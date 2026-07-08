@@ -67,11 +67,11 @@ Each scenario directory contains:
 
 Each scenario implementation:
 1. Has a package matching the scenario name (e.g., `package fibonacci_naive_recursion`)
-2. Contains an `@Compile` annotated object with the core logic
-3. Defines a `@main` function to compile and write UPLC output to the same directory
+2. Either contains an `@Compile` annotated object with the core logic (most scenarios), or builds the UPLC `Term` directly for hand-optimized ones (`fibonacci`, `fibonacci_prepacked`, `factorial`)
+3. Defines a `@main` function to compile (or assemble) and write UPLC output to the same directory
 4. Generates a parameterized lambda function (not pre-applied)
 
-**Example structure:**
+**Example structure (`@Compile`-based scenario):**
 ```scala
 package fibonacci_naive_recursion
 
@@ -115,10 +115,13 @@ Correctness (all `measurements` accept, all `checks` reject) and metrics (CPU/me
 
 ### UPLC Compilation Process
 
+Most scenarios go through the Scalus compiler plugin:
 1. Scala code annotated with `@Compile` is processed by the Scalus compiler plugin
 2. Scalus transforms Scala AST to Plutus IR
 3. Output is rendered as UPLC text and written to the same `src/<scenario_name>/` directory
 4. The compilation happens at Scala compile-time, producing a standalone UPLC program
+
+The hand-optimized scenarios (`fibonacci`, `fibonacci_prepacked`, `factorial`) skip the plugin: the `@main` builds a `Term` directly, runs it through `common.Renamer` to alpha-rename identifiers, and writes the rendered UPLC text to the same directory.
 
 **Key insight:** Functions are compiled as parameterized lambda functions that accept inputs (e.g., `\n -> ...`), not pre-applied with specific values. This allows the UPLC-CAPE benchmark framework to measure performance across different input values.
 
