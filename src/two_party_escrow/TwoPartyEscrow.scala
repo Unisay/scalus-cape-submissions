@@ -58,7 +58,7 @@ object TwoPartyEscrowValidator {
           hex"31313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131"
         )
     private inline def escrowPrice: Lovelace = BigInt(75_000_000)
-    private inline def deadlineMillis: BigInt = BigInt(1800000)
+    private inline def deadlineMillis: BigInt = BigInt(1_800_000)
 
     inline def validate(scData: Data): Unit = {
         val sc = scData.to[ScriptContext]

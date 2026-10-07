@@ -13,7 +13,8 @@ the buyer may refund after a deadline. State machine: `Deposited -> Accepted | R
 - **Datum**: `Constr 0 [state, depositTime]` where `state = Constr {0|1|2} []` =
   Deposited | Accepted | Refunded.
 - **Baked-in parameters**: buyer key (`0xAA`×32), seller key (`0xBB`×32), price 75 ADA, deadline
-  30 minutes = 1800000 ms, and the script credential (the ASCII bytes of the 58-character CAPE script hash).
+  30 minutes (1800000 ms, as `POSIXTime` counts milliseconds), and the script credential (the
+  ASCII bytes of the 58-character CAPE script hash).
 
 ## Validation rules
 
