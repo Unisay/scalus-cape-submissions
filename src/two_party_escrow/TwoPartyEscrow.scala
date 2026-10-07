@@ -17,7 +17,7 @@ import scalus.uplc.builtin.Data.{toData, FromData, ToData}
   *
   * Compiles to a `Data -> Unit` spending validator implementing a buyer/seller escrow with a
   * `Deposited -> Accepted | Refunded` state machine. All parameters are baked in (buyer/seller
-  * keys, 75 ADA price, 1800s deadline) per the CAPE spec.
+  * keys, 75 ADA price, 30-minute deadline = 1800000 ms) per the CAPE spec.
   *
   * Redeemer is a raw integer: 0 = Deposit, 1 = Accept, 2 = Refund.
   *
@@ -58,7 +58,7 @@ object TwoPartyEscrowValidator {
           hex"31313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131"
         )
     private inline def escrowPrice: Lovelace = BigInt(75_000_000)
-    private inline def deadlineSeconds: BigInt = BigInt(1800)
+    private inline def deadlineMillis: BigInt = BigInt(1800000)
 
     inline def validate(scData: Data): Unit = {
         val sc = scData.to[ScriptContext]
@@ -149,7 +149,7 @@ object TwoPartyEscrowValidator {
         requireSignedBy(txInfo.signatories, buyerKeyHash, "Buyer must sign refund")
 
         // Valid range must be entirely after the deadline (finite lower bound, strictly greater).
-        val deadline = escrowDatum.depositTime + deadlineSeconds
+        val deadline = escrowDatum.depositTime + deadlineMillis
         require(txInfo.validRange.isEntirelyAfter(deadline), "Deadline has not passed")
 
         val ownCredential = findOwnInputOrFail(txInfo.inputs, txOutRef).resolved.address.credential
