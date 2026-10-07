@@ -150,7 +150,7 @@
                                                                                                                             [c
                                                                                                                               [f
                                                                                                                                 aa]]]
-                                                                                                                          (con integer 1800)]] (error)
+                                                                                                                          (con integer 1800000)]] (error)
                                                                                                                       (con unit ()))])
                                                                                                                 (case (constr 0 [(builtin unListData)
                                                                                                                       [c

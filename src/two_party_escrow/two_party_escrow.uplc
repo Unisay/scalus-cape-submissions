@@ -372,7 +372,7 @@
                                                                                                                             [c
                                                                                                                               [g
                                                                                                                                 am]]]
-                                                                                                                          (con integer 1800)]]
+                                                                                                                          (con integer 1800000)]]
                                                                                                                       (delay (con unit ()))
                                                                                                                       (delay (error))) d))])
                                                                                                               (case (constr 0 [(builtin unListData)
