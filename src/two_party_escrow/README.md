@@ -13,7 +13,8 @@ the buyer may refund after a deadline. State machine: `Deposited -> Accepted | R
 - **Datum**: `Constr 0 [state, depositTime]` where `state = Constr {0|1|2} []` =
   Deposited | Accepted | Refunded.
 - **Baked-in parameters**: buyer key (`0xAA`×32), seller key (`0xBB`×32), price 75 ADA, deadline
-  1800 s, and the script credential (the ASCII bytes of the 58-character CAPE script hash).
+  30 minutes (1800000 ms, as `POSIXTime` counts milliseconds), and the script credential (the
+  ASCII bytes of the 58-character CAPE script hash).
 
 ## Validation rules
 
@@ -23,7 +24,7 @@ the buyer may refund after a deadline. State machine: `Deposited -> Accepted | R
 - **Accept (1)**: current datum state is `Deposited`; signed by the seller; the seller receives
   exactly 75 ADA (summed across seller outputs); no funds remain at the script address.
 - **Refund (2)**: current datum state is `Deposited`; signed by the buyer; the validity range is
-  entirely after `depositTime + 1800` (finite lower bound, strictly greater); the buyer receives
+  entirely after `depositTime + 1800000` (finite lower bound, strictly greater); the buyer receives
   exactly 75 ADA.
 
 ## Implementation notes
