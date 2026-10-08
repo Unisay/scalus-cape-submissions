@@ -58,20 +58,8 @@ val packedFibonacci = fibSeqByteString(26)
       val optimized = term |> Inliner.apply |> CaseConstrApply.apply
       common.Renamer.rename(optimized.plutusV3)
 
-  val program = buildProgram(Options.release)
-  locally:
-      given PlutusVM = PlutusVM.makePlutusV3VM()
-      Util.assertEvaluatesTo(program, input = 10, expected = 55)
-  Util.writeUplc("fibonacci_prepacked", "fibonacci.uplc", program.pretty.render(80))
-
-  // vanRossem preview build (case-on-builtins, batch6, dropList)
-  val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
-  val programVR = buildProgram(vanRossem)
+  val program = buildProgram(Util.release)
   locally:
       given PlutusVM = PlutusVM.makePlutusV3VM(MajorProtocolVersion.vanRossemPV)
-      Util.assertEvaluatesTo(programVR, input = 10, expected = 55)
-  Util.writeUplc(
-    "fibonacci_prepacked",
-    "fibonacci-preview.uplc",
-    programVR.pretty.render(80)
-  )
+      Util.assertEvaluatesTo(program, input = 10, expected = 55)
+  Util.writeUplc("fibonacci_prepacked", "fibonacci.uplc", program.pretty.render(80))

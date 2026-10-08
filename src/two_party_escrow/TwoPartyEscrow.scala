@@ -2,8 +2,7 @@ package two_party_escrow
 
 import common.Util
 import scalus.*
-import scalus.cardano.ledger.MajorProtocolVersion
-import scalus.compiler.{compile, Compile, Options}
+import scalus.compiler.{compile, Compile}
 import scalus.cardano.onchain.plutus.prelude.*
 import scalus.cardano.onchain.plutus.prelude.Option.*
 import scalus.cardano.onchain.plutus.v1.IntervalBoundType
@@ -203,15 +202,6 @@ object TwoPartyEscrowValidator {
 @main def compileTwoPartyEscrow(): Unit =
     val sir = compile(TwoPartyEscrowValidator.validate)
 
-    val program = common.Renamer.rename(sir.toUplcOptimized(using Options.release)().plutusV3)
+    val program = common.Renamer.rename(sir.toUplcOptimized(using Util.release)().plutusV3)
     Util.writeUplc("two_party_escrow", "two_party_escrow.uplc", program.pretty.render(80))
-
-    // vanRossem preview build (case-on-builtins, batch6, dropList)
-    val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
-    val programVR = common.Renamer.rename(sir.toUplcOptimized(using vanRossem)().plutusV3)
-    Util.writeUplc(
-      "two_party_escrow",
-      "two_party_escrow-preview.uplc",
-      programVR.pretty.render(80)
-    )
-    // Verification + metrics are measured by UPLC-CAPE via poreus://UPLC-CAPE/measure-artifact.
+    // Verification and metrics come from the UPLC-CAPE evaluator.

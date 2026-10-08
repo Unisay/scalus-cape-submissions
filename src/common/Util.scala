@@ -1,5 +1,7 @@
 package common
 
+import scalus.cardano.ledger.MajorProtocolVersion
+import scalus.compiler.Options
 import scalus.uplc.{Constant, Program, Term}
 import scalus.uplc.Term.asTerm
 import scalus.uplc.eval.{PlutusVM, Result}
@@ -8,6 +10,12 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 
 object Util:
+
+    /** `Options.release` pinned to van Rossem (protocol version 11), the version UPLC-CAPE measures
+      * on. Pinned explicitly so a later Scalus default (for example PV12) cannot change the output.
+      */
+    val release: Options =
+        Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
 
     /** Write UPLC text to `src/<scenario>/<fileName>` and print a summary. */
     def writeUplc(scenario: String, fileName: String, uplcText: String): Unit =

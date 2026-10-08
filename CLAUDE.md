@@ -7,10 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repository contains UPLC-CAPE benchmark submissions implemented using Scalus, a Scala-to-Plutus compiler. The project compiles Scala code to UPLC (Untyped Plutus Core) for Cardano blockchain execution.
 
 **Key Technologies:**
-- Scalus 0.18.2 - Scala-to-Plutus compiler (library + compiler plugin)
-- Scala 3.3.7
+- Scalus 1.3.0 - Scala-to-Plutus compiler (library + compiler plugin)
+- Scala 3.3.8
 - sbt 1.10.1
 - Plutus Core 1.1.0 target
+
+**Target protocol version:** every Scalus-compiled scenario builds once with `common.Util.release` (`Options.release` pinned to `MajorProtocolVersion.vanRossemPV`, protocol version 11) and writes a single `.uplc`. There is no separate preview build.
 
 **Non-standard sbt layout:** `Compile / scalaSource` is set to `baseDirectory.value / "src"` in `build.sbt`, so sources live directly under `src/<scenario_name>/` (not `src/main/scala/...`).
 
