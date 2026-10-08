@@ -1,7 +1,6 @@
 package htlc
 
-import scalus.cardano.ledger.MajorProtocolVersion
-import scalus.cardano.onchain.plutus.prelude.{List as PList, Option as POption, SortedMap}
+import scalus.cardano.onchain.plutus.prelude.{AssocMap, List as PList, Option as POption, SortedMap}
 import scalus.cardano.onchain.plutus.v1.{
     Address,
     Credential,
@@ -25,7 +24,7 @@ import scalus.uplc.eval.{PlutusVM, Result}
 import scalus.uplc.{Constant, Program, Term}
 
 /** Off-chain harness to evaluate the HTLC validator on a minimal `ScriptContext`
-  * for both `Claim` and `Refund` redeemers, against `changPV` and `vanRossemPV`.
+  * for both `Claim` and `Refund` redeemers.
   *
   * The context is constructed with empty defaults for any field the validator
   * does not read (governance, mint, certificates, redeemers map, etc.).
@@ -79,7 +78,7 @@ object HtlcHarness:
       withdrawals = SortedMap.empty,
       validRange = validRange,
       signatories = PList.Cons(PubKeyHash(signer), PList.Nil),
-      redeemers = SortedMap.empty,
+      redeemers = AssocMap.empty,
       data = SortedMap.empty,
       id = TxId(zero32),
       votes = SortedMap.empty,
@@ -124,12 +123,3 @@ object HtlcHarness:
                     )
                 case Result.Failure(ex, _, _, _) =>
                     sys.error(s"htlc/$label/$variant evaluation failed: $ex")
-
-    /** Evaluate both the changPV (`program`) and vanRossemPV (`programVR`) builds. */
-    def checkBoth(program: Program, programVR: Program): Unit =
-        locally:
-            given PlutusVM = PlutusVM.makePlutusV3VM()
-            check("changPV  ", program)
-        locally:
-            given PlutusVM = PlutusVM.makePlutusV3VM(MajorProtocolVersion.vanRossemPV)
-            check("vanRossem", programVR)

@@ -3,7 +3,7 @@ package factorial_naive_recursion
 import common.Util
 import scalus.*
 import scalus.cardano.ledger.MajorProtocolVersion
-import scalus.compiler.{Compile, compile, Options}
+import scalus.compiler.{Compile, compile}
 import scalus.uplc.eval.PlutusVM
 
 /** UPLC-CAPE Factorial Naive Recursion Scenario
@@ -23,20 +23,8 @@ object FactorialNaiveRecursion:
   // Compile the parameterized factorial function to UPLC Program
   val sir = compile(FactorialNaiveRecursion.factorial)
 
-  val program = common.Renamer.rename(sir.toUplcOptimized(using Options.release)().plutusV3)
-  locally:
-    given PlutusVM = PlutusVM.makePlutusV3VM()
-    Util.assertEvaluatesTo(program, input = 10, expected = 3628800)
-  Util.writeUplc("factorial_naive_recursion", "factorial.uplc", program.pretty.render(80))
-
-  // vanRossem preview build (case-on-builtins, batch6, dropList)
-  val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
-  val programVR = common.Renamer.rename(sir.toUplcOptimized(using vanRossem)().plutusV3)
+  val program = common.Renamer.rename(sir.toUplcOptimized(using Util.release)().plutusV3)
   locally:
     given PlutusVM = PlutusVM.makePlutusV3VM(MajorProtocolVersion.vanRossemPV)
-    Util.assertEvaluatesTo(programVR, input = 10, expected = 3628800)
-  Util.writeUplc(
-    "factorial_naive_recursion",
-    "factorial-preview.uplc",
-    programVR.pretty.render(80)
-  )
+    Util.assertEvaluatesTo(program, input = 10, expected = 3628800)
+  Util.writeUplc("factorial_naive_recursion", "factorial.uplc", program.pretty.render(80))

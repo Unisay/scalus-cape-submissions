@@ -2,13 +2,13 @@ package linear_vesting
 
 import common.Util
 import scalus.*
-import scalus.cardano.ledger.MajorProtocolVersion
-import scalus.compiler.{compile, Compile, Options}
+import scalus.compiler.{compile, Compile}
 import scalus.cardano.onchain.plutus.prelude.*
 import scalus.cardano.onchain.plutus.prelude.Option.*
 import scalus.cardano.onchain.plutus.v2.OutputDatum
 import scalus.cardano.onchain.plutus.v3.*
 import scalus.uplc.builtin.{ByteString, Data}
+import scalus.uplc.builtin.Builtins.divideInteger
 import scalus.uplc.builtin.Data.{toData, FromData, ToData}
 
 /** UPLC-CAPE Linear Vesting Scenario
@@ -121,7 +121,9 @@ object LinearVestingValidator {
         divCeil(futureInstallments * datum.totalVestingQty, datum.totalInstallments)
     }
 
-    def divCeil(x: BigInt, y: BigInt): BigInt = BigInt(1) + (x - BigInt(1)) / y
+    // Floor division on purpose: since Scalus 1.0 `BigInt /` truncates (quotientInteger), which
+    // would make divCeil(0, y) == 1 and shift the schedule at and after vestingPeriodEnd.
+    def divCeil(x: BigInt, y: BigInt): BigInt = BigInt(1) + divideInteger(x - BigInt(1), y)
 
     def beneficiaryPkh(datum: VestingDatum): PubKeyHash =
         datum.beneficiary.credential match
@@ -132,11 +134,6 @@ object LinearVestingValidator {
 @main def compileLinearVesting(): Unit =
     val sir = compile(LinearVestingValidator.validate)
 
-    val program = common.Renamer.rename(sir.toUplcOptimized(using Options.release)().plutusV3)
+    val program = common.Renamer.rename(sir.toUplcOptimized(using Util.release)().plutusV3)
     Util.writeUplc("linear_vesting", "linear_vesting.uplc", program.pretty.render(80))
-
-    // vanRossem preview build (case-on-builtins, batch6, dropList)
-    val vanRossem = Options.release.copy(targetProtocolVersion = MajorProtocolVersion.vanRossemPV)
-    val programVR = common.Renamer.rename(sir.toUplcOptimized(using vanRossem)().plutusV3)
-    Util.writeUplc("linear_vesting", "linear_vesting-preview.uplc", programVR.pretty.render(80))
-    // Verification + metrics are measured by UPLC-CAPE via poreus://UPLC-CAPE/measure-artifact.
+    // Verification and metrics come from the UPLC-CAPE evaluator.
