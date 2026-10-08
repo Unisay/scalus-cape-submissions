@@ -34,7 +34,5 @@ evaluator's exact semantics: the deposit path has no own script input (the fundi
 script's own input), so the script credential is baked in and the deposit output is located by
 credential; and `depositTime` is taken from the validity range's upper bound per the spec.
 
-Two artifacts are produced: `two_party_escrow.uplc` (changPV, mainnet) and
-`two_party_escrow-preview.uplc` (vanRossem preview). Both pass the full CAPE suite (all
-`measurements` succeed, all `checks` error) and beat the Plinth production baseline on CPU, memory
-and script size.
+The build produces one artifact, `two_party_escrow.uplc`, compiled for van Rossem (protocol
+version 11).

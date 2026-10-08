@@ -7,10 +7,12 @@ This file provides guidance to GitHub Copilot when working with code in this rep
 This repository contains UPLC-CAPE benchmark submissions implemented using Scalus, a Scala-to-Plutus compiler. The project compiles Scala code to UPLC (Untyped Plutus Core) for Cardano blockchain execution.
 
 **Key Technologies:**
-- Scalus 0.18.2 - Scala-to-Plutus compiler (library + compiler plugin)
-- Scala 3.3.7
+- Scalus 1.3.0 - Scala-to-Plutus compiler (library + compiler plugin)
+- Scala 3.3.8
 - sbt 1.10.1
 - Plutus Core 1.1.0 target
+
+**Target protocol version:** every Scalus-compiled scenario builds once with `common.Util.release` (`Options.release` pinned to `MajorProtocolVersion.vanRossemPV`, protocol version 11) and writes a single `.uplc`. There is no separate preview build.
 
 **Non-standard sbt layout:** `Compile / scalaSource` is set to `baseDirectory.value / "src"` in `build.sbt`, so sources live directly under `src/<scenario_name>/` (not `src/main/scala/...`).
 
@@ -85,7 +87,7 @@ object FibonacciNaiveRecursion:
     // Write to src/fibonacci_naive_recursion/fibonacci.uplc
 ```
 
-`src/common/` and `src/bench/` are shared helpers, not scenario submissions: `common/Renamer.scala` alpha-renames UPLC identifiers to short alphabetic names (Scalus can emit `NAME-NNNNrMMMM`-style names that some Plutus Core parsers reject), and `bench/Bench.scala` is a local ad-hoc runner for evaluating a compiled `.uplc` file against a sample input. Neither is part of the submission format.
+`src/common/` and `src/bench/` are shared helpers, not scenario submissions: `common/Renamer.scala` alpha-renames UPLC identifiers to short alphabetic names (Scalus before 1.2.0 emitted `NAME-NNNNrMMMM`-style names that some Plutus Core parsers reject; the renamer is kept for short, stable names), and `bench/Bench.scala` is a local ad-hoc runner for evaluating a compiled `.uplc` file against a sample input. Neither is part of the submission format.
 
 ### Current Scenarios
 

@@ -39,7 +39,8 @@ The continuing output is selected as the *first* script output (the CAPE evaluat
 outputs, so the head is the most-recently-added one); the schedule tests attach a second, stale
 script output that must be ignored.
 
-Two artifacts are produced: `linear_vesting.uplc` (changPV, mainnet) and
-`linear_vesting-preview.uplc` (vanRossem preview). Both pass the full CAPE suite (all
-`measurements` succeed, all `checks` error) and beat the Plinth production baseline on CPU, memory
-and script size.
+`divCeil` uses floor division (`divideInteger`) explicitly. Since Scalus 1.0, `BigInt /` truncates
+toward zero (`quotientInteger`), which would make `divCeil(0, y)` equal 1 instead of 0.
+
+The build produces one artifact, `linear_vesting.uplc`, compiled for van Rossem (protocol version
+11). At that version Scalus lowers `quantityOf` to the CIP-153 `lookupCoin` builtin.
