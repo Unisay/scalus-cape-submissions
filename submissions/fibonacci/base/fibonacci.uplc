@@ -10,9 +10,7 @@
               (lam n
                 (force (case (constr 0 [
                   (builtin lessThanEqualsInteger) n (con integer 1)
-                ] (delay n) (delay (force (case (constr 0 [
-                  (builtin equalsInteger) n (con integer 2)
-                ] (delay (con integer 1)) (delay [
+                ] (delay n) (delay [
                   (builtin addInteger) [
                     fibonacci_FibonacciBase__fibonacci [
                       (builtin subtractInteger) n (con integer 1)
@@ -23,7 +21,6 @@
                     ]
                   ]
                 ]))
-                  __builtin_IfThenElse))))
                   __builtin_IfThenElse))))
           ]) (lam ff
           [

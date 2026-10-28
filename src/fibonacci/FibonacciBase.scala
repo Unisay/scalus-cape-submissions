@@ -16,7 +16,6 @@ object FibonacciBase:
     /** Naive recursive implementation */
     def fibonacci(n: BigInt): BigInt =
         if n <= 1 then n
-        else if n == BigInt(2) then BigInt(1)
         else fibonacci(n - 1) + fibonacci(n - 2)
 
 @main def compileFibonacciBase(): Unit =
