@@ -1,11 +1,8 @@
 (program 1.1.0 [(lam a
-      [(lam b [(lam c [b (lam d [c c d])]) (lam c [b (lam d [c c d])])]) (lam e
-          (lam f
-            (force (case (constr 0 [(builtin lessThanEqualsInteger) f
-                  (con integer 1)] (delay f)
-                (delay (force (case (constr 0 [(builtin equalsInteger) f
-                      (con integer 2)] (delay (con integer 1))
-                    (delay [(builtin addInteger) [e [(builtin subtractInteger) f
-                          (con integer 1)]] [e [(builtin subtractInteger) f
-                          (con integer 2)]]])) a)))) a))))])
-    (force (builtin ifThenElse))])
+      [(lam b [a (lam c [b b c])]) (lam b [a (lam c [b b c])])]) (lam d
+      (lam e
+        (force (case (constr 0 [(builtin lessThanEqualsInteger) e
+              (con integer 1)] (delay e) (delay [(builtin addInteger) [d
+                [(builtin subtractInteger) e (con integer 1)]] [d
+                [(builtin subtractInteger) e
+                  (con integer 2)]]])) (force (builtin ifThenElse))))))])
