@@ -1,38 +1,50 @@
 # Two-Party Escrow (Scalus)
 
-Plutus V3 spending validator (`Data -> Unit`) for the UPLC-CAPE `two_party_escrow` scenario,
-compiled from Scala with Scalus.
+One Plutus V3 script (`Data -> Unit`) implements revision 2 of the UPLC-CAPE escrow scenario.
+The minting purpose handles deposits and token burns; the spending purpose handles acceptance
+and refunds. The script derives its own hash from the context.
 
-## Protocol
+## Parameters and encoding
 
-A buyer deposits 75 ADA into the script; the seller may accept (funds released to the seller) or
-the buyer may refund after a deadline. State machine: `Deposited -> Accepted | Refunded`.
+- Buyer and seller key hashes are respectively 28 bytes of `aa` and `bb`.
+- The price is 75 ADA (`75000000` lovelace), and the refund delay is 1800000 milliseconds.
+- The thread token has policy id equal to the script hash and token name `escrow` (`657363726f77`).
+- The inline datum is exactly `Constr 0 [I depositTime]`.
+- Redeemers are raw Data integers: Minting 0 deposits; Minting 1 or 2 burns; Spending 1 accepts;
+  Spending 2 refunds. Every other purpose or redeemer fails.
 
-- **Redeemer**: a raw integer — `0` = Deposit, `1` = Accept, `2` = Refund. Anything else (other
-  integers, constructors, bytestrings, lists, maps) is rejected.
-- **Datum**: `Constr 0 [state, depositTime]` where `state = Constr {0|1|2} []` =
-  Deposited | Accepted | Refunded.
-- **Baked-in parameters**: buyer key (`0xAA`×32), seller key (`0xBB`×32), price 75 ADA, deadline
-  30 minutes (1800000 ms, as `POSIXTime` counts milliseconds), and the script credential (the
-  ASCII bytes of the 58-character CAPE script hash).
+## Rules
 
-## Validation rules
+Deposit requires the buyer's signature, a finite upper validity bound `t`, and an own-policy
+mint entry containing exactly one `escrow` token. Exactly one output has the script payment
+credential; it must hold exactly 75 ADA and one thread token, with inline datum recording `t-1`.
+Other assets, staking credentials and reference scripts are allowed.
 
-- **Deposit (0)**: signed by the buyer; exactly one output to the script address carrying exactly
-  75 ADA and datum `Deposited` whose `depositTime` equals the *upper* bound of the validity range
-  (which must be finite — an infinite upper bound is rejected).
-- **Accept (1)**: current datum state is `Deposited`; signed by the seller; the seller receives
-  exactly 75 ADA (summed across seller outputs); no funds remain at the script address.
-- **Refund (2)**: current datum state is `Deposited`; signed by the buyer; the validity range is
-  entirely after `depositTime + 1800000` (finite lower bound, strictly greater); the buyer receives
-  exactly 75 ADA.
+Burn requires the own-policy mint entry to contain exactly `{escrow: -1}`.
 
-## Implementation notes
+Accept and Refund find the own input using its output reference, derive the script hash from
+its payment credential, require exactly one input at that credential, and require a token burn.
+Accept requires the seller's signature and payments totalling at least 75 ADA to the seller.
+Refund requires the buyer's signature, a finite lower validity bound strictly greater than
+`depositTime + 1800000`, and payments totalling at least 75 ADA to the buyer. Payments compare
+whole payment credentials and sum all matching outputs. Remaining script outputs are allowed.
 
-Adapted from the Scalus `scalus.examples.cape.twopartyescrow` reference, corrected for the CAPE
-evaluator's exact semantics: the deposit path has no own script input (the funding input is not the
-script's own input), so the script credential is baked in and the deposit output is located by
-credential; and `depositTime` is taken from the validity range's upper bound per the spec.
+The ledger's value conservation and the minting branch establish token provenance; the
+spending branch does not repeat the token quantity check on its own input. Validity closure
+flags are ignored because the ledger supplies inclusive lower and exclusive upper bounds.
 
-The build produces one artifact, `two_party_escrow.uplc`, compiled for van Rossem (protocol
-version 11).
+## Building and validation
+
+```sh
+nix develop --command sbt 'runMain two_party_escrow.compileTwoPartyEscrow'
+nix develop --command sbt 'runMain two_party_escrow.compileTwoPartyEscrowDebug'
+```
+
+The debug main retains rule-labelled error traces in `.local/two_party_escrow-debug.uplc`.
+Non-integer redeemers and malformed contexts can fail in `unIData` / `unConstrData` without
+a program trace; these failures map to X1 and X3 respectively. This diagnostic artifact is separate from
+the release submission. The UPLC-CAPE canonical evaluator
+runs the scenario suite and measures CPU, memory, serialized script size and term size.
+
+The release artifact is `two_party_escrow.uplc`, compiled with `common.Util.release` for
+van Rossem (protocol version 11) on Scalus 1.3.0 / Scala 3.3.8.
