@@ -54,6 +54,8 @@ sbt "runMain linear_vesting.compileLinearVesting"
 
 **Important:** Main classes require the full package path (e.g., `fibonacci_naive_recursion.compileFibonacciNaiveRecursion`, not just `compileFibonacciNaiveRecursion`).
 
+**Diagnostic build:** `runMain two_party_escrow.compileTwoPartyEscrowDebug` writes a traced artifact to `.local/two_party_escrow-debug.uplc`, separate from submission outputs.
+
 ## Architecture
 
 ### Directory Organization
@@ -102,14 +104,14 @@ All scenarios are located in `src/`:
 - `htlc/` - Spending validator (`Data -> Unit`) with `Claim(preimage)` / `Refund` redeemer. Uses the production-safe validity-range convention (claim checks upper bound of `txInfoValidRange`; refund checks lower bound).
 
 **Two-Party Escrow:**
-- `two_party_escrow/` - Spending validator (`Data -> Unit`) with a `Deposited -> Accepted | Refunded` state machine. Raw-integer redeemer (0=Deposit, 1=Accept, 2=Refund); buyer/seller keys, 75 ADA price and 30-minute (1800000 ms) deadline baked in. Deposit records the (finite) upper bound of `txInfoValidRange` as `depositTime`; refund requires the lower bound strictly after `depositTime + 1800000`.
+- `two_party_escrow/` - One Plutus V3 script (`Data -> Unit`) for thread-token escrow revision 2. Minting redeemer 0 deposits; minting 1/2 burns; spending 1 accepts; spending 2 refunds. A one-field inline datum records the finite upper bound minus one millisecond. The script derives its hash from the context, enforces one escrow input per spend and a burn, and sums payments of at least 75 ADA. Refund requires a finite lower bound strictly after `depositTime + 1800000`.
 
 **Linear Vesting:**
 - `linear_vesting/` - Spending validator (`Data -> Unit`) releasing a native asset on an installment schedule. Nullary-constructor redeemer (`Constr 0 []`=PartialUnlock, `Constr 1 []`=FullUnlock); all parameters in the 7-field datum. Partial unlock enforces the `divCeil` schedule, datum preservation and a single-script-input anti-double-satisfaction guard, taking the first (most-recently-added) script output as the continuing UTxO.
 
 ### Verification and measurement
 
-Correctness (all `measurements` accept, all `checks` reject) and metrics (CPU/memory/script size) are measured by the UPLC-CAPE framework, not locally: it evaluates the compiled `.uplc` against `scenarios/<scenario>/cape-tests.json` with the canonical evaluator. Do not build a local measurer.
+Correctness (all `measurements` and `checks` match their declared expectations) and metrics (CPU/memory/script size) are measured by the UPLC-CAPE framework, not locally: it evaluates the compiled `.uplc` against `scenarios/<scenario>/cape-tests.json` with the canonical evaluator. Do not build a local measurer.
 
 ### UPLC Compilation Process
 
