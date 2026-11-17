@@ -12,392 +12,478 @@
                         [(lam i
                             [(lam j
                                 [(lam k
-                                    [(lam l
-                                        (lam m
+                                    (lam l
+                                      [(lam m
                                           [(lam n
                                               [(lam o
                                                   [(lam p
-                                                      (case [b p] (error)
-                                                        [(lam q
+                                                      (case [b o] [(lam q
                                                             (case [q
-                                                                (con integer 0)] [(lam r
+                                                                (con integer 0)] (case (case [q
+                                                                    (con integer 1)] [q
+                                                                    (con integer 2)]
+                                                                  (con bool True)) (error)
+                                                                (case (case (constr 0 [c
+                                                                        [a
+                                                                          (con integer 4)
+                                                                          [e
+                                                                            [(builtin unConstrData)
+                                                                              [c
+                                                                                m]]]]]
+                                                                      [(builtin unBData)
+                                                                        [c p]]
+                                                                      (con integer -1)) h) (error)
+                                                                  (con unit ())))
+                                                              [(lam r
                                                                   [(lam s
                                                                       [(lam t
-                                                                          (case [q
-                                                                              (con integer 1)] (case [q
-                                                                                (con integer 2)] (error)
-                                                                              [(lam u
-                                                                                  [(lam v
-                                                                                      [(lam w
-                                                                                          [(lam x
-                                                                                              [(lam y
-                                                                                                  [(lam z
-                                                                                                      [(lam aa
-                                                                                                          [(lam ab
-                                                                                                              (case [l
-                                                                                                                  [(builtin unListData)
-                                                                                                                    [h
-                                                                                                                      aa
-                                                                                                                      z]]] (error)
-                                                                                                                (con unit ())))
-                                                                                                            (case [(builtin equalsInteger)
-                                                                                                                [(builtin unIData)
-                                                                                                                  (case (constr 0 aa
-                                                                                                                      (con data (I 0))
-                                                                                                                      (lam ac
-                                                                                                                        [(lam ad
-                                                                                                                            (lam ae
-                                                                                                                              [(builtin iData)
-                                                                                                                                [(lam af
-                                                                                                                                    (case [(builtin equalsData)
-                                                                                                                                        [c
-                                                                                                                                          [e
-                                                                                                                                            [(builtin unConstrData)
-                                                                                                                                              [c
-                                                                                                                                                af]]]]
-                                                                                                                                        (con data (Constr 0 [B #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]))] ad
-                                                                                                                                      [(builtin addInteger)
-                                                                                                                                        ad
-                                                                                                                                        [(builtin unIData)
-                                                                                                                                          [k
-                                                                                                                                            [c
-                                                                                                                                              [f
-                                                                                                                                                af]]]]]))
-                                                                                                                                  [e
-                                                                                                                                    [(builtin unConstrData)
-                                                                                                                                      ae]]]]))
-                                                                                                                          [(builtin unIData)
-                                                                                                                            ac]])) j)]
-                                                                                                                (con integer 75000000)] (error)
-                                                                                                              (con unit ()))])
-                                                                                                        [(builtin unListData)
-                                                                                                          [c
-                                                                                                            [o
-                                                                                                              w]]]])
-                                                                                                    [c
-                                                                                                      [e
-                                                                                                        [(builtin unConstrData)
-                                                                                                          [c
-                                                                                                            [e
-                                                                                                              [(builtin unConstrData)
-                                                                                                                [c
-                                                                                                                  [f
-                                                                                                                    [i
-                                                                                                                      [(builtin unListData)
+                                                                          [(lam u
+                                                                              [(lam v
+                                                                                  [(lam w
+                                                                                      [(lam x
+                                                                                          [(lam y
+                                                                                              [(lam z
+                                                                                                  [(lam aa
+                                                                                                      [(lam ab
+                                                                                                          [(lam ac
+                                                                                                              [(lam ad
+                                                                                                                  (case [b
+                                                                                                                      ad] (error)
+                                                                                                                    (error)
+                                                                                                                    (case [(builtin equalsData)
                                                                                                                         [c
-                                                                                                                          w]]
-                                                                                                                      s]]]]]]]]]])
-                                                                                                (case [(lam ag
-                                                                                                      (lam ah
-                                                                                                        [(lam ai
-                                                                                                            [(lam aj
-                                                                                                                (case [b
-                                                                                                                    aj] (con bool False)
-                                                                                                                  [(lam ak
-                                                                                                                      (case (case [b
-                                                                                                                            [(builtin unConstrData)
-                                                                                                                              [c
-                                                                                                                                [f
-                                                                                                                                  ai]]]] (con bool False)
-                                                                                                                          (con bool True)) [(builtin lessThanEqualsInteger)
+                                                                                                                          [e
+                                                                                                                            ad]]
+                                                                                                                        ac] (error)
+                                                                                                                      (con unit ()))))
+                                                                                                                [(builtin unConstrData)
+                                                                                                                  [c
+                                                                                                                    [n
+                                                                                                                      y]]]])
+                                                                                                            [(builtin constrData)
+                                                                                                              (con integer 0)
+                                                                                                              [d
+                                                                                                                [(builtin iData)
+                                                                                                                  t]
+                                                                                                                (con (list data) [])]]])
+                                                                                                        (case [(builtin equalsInteger)
+                                                                                                            (case (constr 0 v
+                                                                                                                (con bytestring #657363726f77)
+                                                                                                                [(builtin unValueData)
+                                                                                                                  z]) (builtin lookupCoin))
+                                                                                                            (con integer 1)] (error)
+                                                                                                          (con unit ()))])
+                                                                                                    (case [(builtin equalsInteger)
+                                                                                                        [(builtin unIData)
+                                                                                                          [i
+                                                                                                            z]]
+                                                                                                        (con integer 75000000)] (error)
+                                                                                                      (con unit ()))])
+                                                                                                [c
+                                                                                                  [f
+                                                                                                    y]]])
+                                                                                            (case [(builtin unListData)
+                                                                                                [(lam ae
+                                                                                                    (lam af
+                                                                                                      [(lam ag
+                                                                                                          [ag
+                                                                                                            ag])
+                                                                                                        (lam ah
+                                                                                                          (lam ai
+                                                                                                            (case ai (lam aj
+                                                                                                                (lam ak
+                                                                                                                  [(builtin listData)
+                                                                                                                    [(lam al
+                                                                                                                        (case [af
+                                                                                                                            aj] al
+                                                                                                                          [d
+                                                                                                                            aj
+                                                                                                                            al]))
+                                                                                                                      [(builtin unListData)
+                                                                                                                        [ah
                                                                                                                           ah
-                                                                                                                          [(builtin unIData)
-                                                                                                                            [c
-                                                                                                                              ak]]]
-                                                                                                                        [(builtin lessThanInteger)
-                                                                                                                          ah
-                                                                                                                          [(builtin unIData)
-                                                                                                                            [c
-                                                                                                                              ak]]]))
-                                                                                                                    [e
-                                                                                                                      aj]]
-                                                                                                                  (con bool False)))
-                                                                                                              [(builtin unConstrData)
-                                                                                                                [c
-                                                                                                                  ai]]])
-                                                                                                          [e
-                                                                                                            [(builtin unConstrData)
-                                                                                                              [c
-                                                                                                                ag]]]]))
+                                                                                                                          ak]]]]))
+                                                                                                              (con data (List [])))))
+                                                                                                        ae]))
+                                                                                                  [(builtin unListData)
+                                                                                                    [c
+                                                                                                      [n
+                                                                                                        r]]]
+                                                                                                  (lam am
+                                                                                                    [(builtin equalsData)
+                                                                                                      [c
+                                                                                                        [e
+                                                                                                          [(builtin unConstrData)
+                                                                                                            [c
+                                                                                                              [e
+                                                                                                                [(builtin unConstrData)
+                                                                                                                  am]]]]]]
+                                                                                                      x])]] (lam an
+                                                                                                (lam ao
+                                                                                                  (case ao (lam ap
+                                                                                                      (lam aq
+                                                                                                        (error)))
                                                                                                     [e
                                                                                                       [(builtin unConstrData)
-                                                                                                        [c
-                                                                                                          [a
-                                                                                                            (con integer 7)
-                                                                                                            w]]]]
-                                                                                                    [(builtin addInteger)
-                                                                                                      [(builtin unIData)
-                                                                                                        [c
-                                                                                                          [f
-                                                                                                            u]]]
-                                                                                                      (con integer 1800000)]] (error)
-                                                                                                  (con unit ()))])
-                                                                                            (case (constr 0 [(builtin unListData)
-                                                                                                  [c
-                                                                                                    [a
-                                                                                                      (con integer 8)
-                                                                                                      w]]]
-                                                                                                (con bytestring #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
-                                                                                                (con string "Buyer must sign refund")) g)])
-                                                                                        [e
-                                                                                          [(builtin unConstrData)
-                                                                                            [c
-                                                                                              n]]]])
-                                                                                    (case [b
+                                                                                                        an]])))
+                                                                                              (error))])
+                                                                                        [(builtin constrData)
+                                                                                          (con integer 1)
+                                                                                          [d
+                                                                                            u
+                                                                                            (con (list data) [])]]])
+                                                                                    (case (case (constr 0 [c
+                                                                                            [a
+                                                                                              (con integer 4)
+                                                                                              r]]
+                                                                                          v
+                                                                                          (con integer 1)) h) (error)
+                                                                                      (con unit ()))])
+                                                                                [(builtin unBData)
+                                                                                  u]])
+                                                                            [c
+                                                                              p]])
+                                                                        [(lam ar
+                                                                            (case [b
+                                                                                ar] (error)
+                                                                              [(builtin subtractInteger)
+                                                                                [(builtin unIData)
+                                                                                  [c
+                                                                                    [e
+                                                                                      ar]]]
+                                                                                (con integer 1)]
+                                                                              (error)))
+                                                                          [(builtin unConstrData)
+                                                                            [c
+                                                                              [e
+                                                                                [(builtin unConstrData)
+                                                                                  [c
+                                                                                    [f
+                                                                                      [e
                                                                                         [(builtin unConstrData)
                                                                                           [c
-                                                                                            u]]] (con unit ())
-                                                                                      (error)
-                                                                                      (error))])
-                                                                                [e
-                                                                                  [(builtin unConstrData)
-                                                                                    (case [b
-                                                                                        t] [c
+                                                                                            [a
+                                                                                              (con integer 7)
+                                                                                              r]]]]]]]]]]]])
+                                                                    (case (constr 0 [(builtin unListData)
+                                                                          [c [a
+                                                                              (con integer 8)
+                                                                              r]]]
+                                                                        (con bytestring #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+                                                                        (con string "D1: buyer signature")) g)])
+                                                                [e
+                                                                  [(builtin unConstrData)
+                                                                    [c m]]]]))
+                                                          [(builtin equalsInteger)
+                                                            [(builtin unIData)
+                                                              [c [f m]]]]]
+                                                        [(lam as
+                                                            [(lam at
+                                                                [(lam au
+                                                                    [(lam av
+                                                                        [(lam aw
+                                                                            [(lam ax
+                                                                                [(lam ay
+                                                                                    [(lam az
+                                                                                        [(lam ba
+                                                                                            (case at [(lam bb
+                                                                                                  [(lam bc
+                                                                                                      [(lam bd
+                                                                                                          (case [(builtin lessThanEqualsInteger)
+                                                                                                              (con integer 75000000)
+                                                                                                              [(builtin unIData)
+                                                                                                                [k
+                                                                                                                  [(builtin unListData)
+                                                                                                                    [c
+                                                                                                                      [n
+                                                                                                                        av]]]
+                                                                                                                  bb]]] (error)
+                                                                                                            (con unit ())))
+                                                                                                        (case [(builtin lessThanInteger)
+                                                                                                            [(builtin addInteger)
+                                                                                                              [(builtin unIData)
+                                                                                                                [c
+                                                                                                                  [e
+                                                                                                                    [(builtin unConstrData)
+                                                                                                                      [(lam be
+                                                                                                                          (case [b
+                                                                                                                              be] [c
+                                                                                                                              [e
+                                                                                                                                be]]
+                                                                                                                            (error)))
+                                                                                                                        [(builtin unConstrData)
+                                                                                                                          [c
+                                                                                                                            [f
+                                                                                                                              p]]]]]]]]
+                                                                                                              (con integer 1800000)]
+                                                                                                            [(lam bf
+                                                                                                                (case [b
+                                                                                                                    bf] (error)
+                                                                                                                  [(builtin unIData)
+                                                                                                                    [c
+                                                                                                                      [e
+                                                                                                                        bf]]]
+                                                                                                                  (error)))
+                                                                                                              [(builtin unConstrData)
+                                                                                                                [c
+                                                                                                                  [e
+                                                                                                                    [(builtin unConstrData)
+                                                                                                                      [c
+                                                                                                                        [e
+                                                                                                                          [(builtin unConstrData)
+                                                                                                                            [c
+                                                                                                                              [a
+                                                                                                                                (con integer 7)
+                                                                                                                                av]]]]]]]]]]] (error)
+                                                                                                          (con unit ()))])
+                                                                                                    (case (constr 0 [(builtin unListData)
+                                                                                                          [c
+                                                                                                            [a
+                                                                                                              (con integer 8)
+                                                                                                              av]]]
+                                                                                                        bb
+                                                                                                        (con string "R1: buyer signature")) g)])
+                                                                                                (con bytestring #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)]
+                                                                                              [(lam bg
+                                                                                                  [(lam bh
+                                                                                                      (case [(builtin lessThanEqualsInteger)
+                                                                                                          (con integer 75000000)
+                                                                                                          [(builtin unIData)
+                                                                                                            [k
+                                                                                                              [(builtin unListData)
+                                                                                                                [c
+                                                                                                                  [n
+                                                                                                                    av]]]
+                                                                                                              bg]]] (error)
+                                                                                                        (con unit ())))
+                                                                                                    (case (constr 0 [(builtin unListData)
+                                                                                                          [c
+                                                                                                            [a
+                                                                                                              (con integer 8)
+                                                                                                              av]]]
+                                                                                                        bg
+                                                                                                        (con string "A1: seller signature")) g)])
+                                                                                                (con bytestring #bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)]))
+                                                                                          (case [(builtin equalsInteger)
+                                                                                              (case (constr 0 ax
+                                                                                                  (con bytestring #657363726f77)
+                                                                                                  [(builtin unValueData)
+                                                                                                    [c
+                                                                                                      [a
+                                                                                                        (con integer 4)
+                                                                                                        av]]]) (builtin lookupCoin))
+                                                                                              (con integer -1)] (error)
+                                                                                            (con unit ()))])
+                                                                                      (case [(builtin equalsInteger)
+                                                                                          [(builtin unIData)
+                                                                                            (case (constr 0 aw
+                                                                                                (con data (I 0))
+                                                                                                (lam bi
+                                                                                                  [(lam bj
+                                                                                                      (lam bk
+                                                                                                        [(builtin iData)
+                                                                                                          (case [(builtin equalsData)
+                                                                                                              [c
+                                                                                                                [e
+                                                                                                                  [(builtin unConstrData)
+                                                                                                                    [c
+                                                                                                                      [e
+                                                                                                                        [(builtin unConstrData)
+                                                                                                                          [c
+                                                                                                                            [f
+                                                                                                                              [e
+                                                                                                                                [(builtin unConstrData)
+                                                                                                                                  bk]]]]]]]]]]
+                                                                                                              ay] bj
+                                                                                                            [(builtin addInteger)
+                                                                                                              bj
+                                                                                                              (con integer 1)])]))
+                                                                                                    [(builtin unIData)
+                                                                                                      bi]])) j)]
+                                                                                          (con integer 1)] (error)
+                                                                                        (con unit ()))])
+                                                                                  [(builtin constrData)
+                                                                                    (con integer 1)
+                                                                                    [d
+                                                                                      [(builtin bData)
+                                                                                        ax]
+                                                                                      (con (list data) [])]]])
+                                                                              [(lam bl
+                                                                                  (case [b
+                                                                                      bl] (error)
+                                                                                    [(builtin unBData)
+                                                                                      [c
                                                                                         [e
-                                                                                          t]]
-                                                                                      (error))]]])
-                                                                            [(lam al
-                                                                                [(lam am
-                                                                                    [(lam an
-                                                                                        [(lam ao
-                                                                                            [(lam ap
-                                                                                                [(lam aq
-                                                                                                    (case [l
-                                                                                                        [(builtin unListData)
-                                                                                                          [h
-                                                                                                            ap
-                                                                                                            ao]]] (error)
-                                                                                                      (con unit ())))
-                                                                                                  (case [(builtin equalsInteger)
-                                                                                                      [(builtin unIData)
-                                                                                                        (case (constr 0 ap
-                                                                                                            (con data (I 0))
-                                                                                                            (lam ar
-                                                                                                              [(lam as
-                                                                                                                  (lam at
-                                                                                                                    [(builtin iData)
-                                                                                                                      [(lam au
+                                                                                          bl]]]))
+                                                                                [(builtin unConstrData)
+                                                                                  [c
+                                                                                    [e
+                                                                                      [(builtin unConstrData)
+                                                                                        [c
+                                                                                          [e
+                                                                                            [(builtin unConstrData)
+                                                                                              [c
+                                                                                                [f
+                                                                                                  [(lam bm
+                                                                                                      [(lam bn
+                                                                                                          [bn
+                                                                                                            bn])
+                                                                                                        (lam bo
+                                                                                                          [(lam bp
+                                                                                                              (lam bq
+                                                                                                                (case bq (lam br
+                                                                                                                    (lam bs
+                                                                                                                      [e
+                                                                                                                        [(builtin unConstrData)
                                                                                                                           (case [(builtin equalsData)
                                                                                                                               [c
                                                                                                                                 [e
                                                                                                                                   [(builtin unConstrData)
-                                                                                                                                    [c
-                                                                                                                                      au]]]]
-                                                                                                                              (con data (Constr 0 [B #bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb]))] as
-                                                                                                                            [(builtin addInteger)
-                                                                                                                              as
-                                                                                                                              [(builtin unIData)
-                                                                                                                                [k
-                                                                                                                                  [c
-                                                                                                                                    [f
-                                                                                                                                      au]]]]]))
-                                                                                                                        [e
-                                                                                                                          [(builtin unConstrData)
-                                                                                                                            at]]]]))
-                                                                                                                [(builtin unIData)
-                                                                                                                  ar]])) j)]
-                                                                                                      (con integer 75000000)] (error)
-                                                                                                    (con unit ()))])
-                                                                                              [(builtin unListData)
-                                                                                                [c
-                                                                                                  [o
-                                                                                                    am]]]])
-                                                                                          [c
-                                                                                            [e
-                                                                                              [(builtin unConstrData)
-                                                                                                [c
-                                                                                                  [e
-                                                                                                    [(builtin unConstrData)
-                                                                                                      [c
-                                                                                                        [f
-                                                                                                          [i
-                                                                                                            [(builtin unListData)
-                                                                                                              [c
-                                                                                                                am]]
-                                                                                                            s]]]]]]]]]])
-                                                                                      (case (constr 0 [(builtin unListData)
-                                                                                            [c
-                                                                                              [a
-                                                                                                (con integer 8)
-                                                                                                am]]]
-                                                                                          (con bytestring #bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
-                                                                                          (con string "Seller must sign accept")) g)])
-                                                                                  [e
-                                                                                    [(builtin unConstrData)
-                                                                                      [c
-                                                                                        n]]]])
-                                                                              (case [b
-                                                                                  [(builtin unConstrData)
-                                                                                    [c
-                                                                                      [e
-                                                                                        [(builtin unConstrData)
-                                                                                          (case [b
-                                                                                              t] [c
-                                                                                              [e
-                                                                                                t]]
-                                                                                            (error))]]]]] (con unit ())
-                                                                                (error)
-                                                                                (error))]))
-                                                                        [(builtin unConstrData)
-                                                                          [c [f
-                                                                              r]]]])
-                                                                    [e
-                                                                      [(builtin unConstrData)
-                                                                        [c
-                                                                          r]]]])
-                                                                [e p]] [(lam av
-                                                                  [(lam aw
-                                                                      (case [(lam ax
-                                                                            [(builtin equalsData)
-                                                                              [ax
-                                                                                (case [(builtin unListData)
-                                                                                    [h
-                                                                                      [(builtin unListData)
-                                                                                        [c
-                                                                                          [o
-                                                                                            av]]]
-                                                                                      (con data (Constr 1 [B #31313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131]))]] (lam ay
-                                                                                    (lam az
-                                                                                      (case az (lam ba
-                                                                                          (lam bb
-                                                                                            (error)))
-                                                                                        [e
-                                                                                          [(builtin unConstrData)
-                                                                                            ay]])))
-                                                                                  (error))]
-                                                                              [ax
-                                                                                [d
-                                                                                  (con data (Constr 0 [Constr 1 [B #31313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131313131], Constr 1 []]))
-                                                                                  [d
-                                                                                    (con data (Map [(B #, Map [(B #, I 75000000)])]))
-                                                                                    [d
-                                                                                      [(builtin constrData)
-                                                                                        (con integer 2)
-                                                                                        [d
-                                                                                          [ax
-                                                                                            [d
-                                                                                              (con data (Constr 0 []))
-                                                                                              [d
-                                                                                                [(builtin iData)
-                                                                                                  [(lam bc
-                                                                                                      [(lam bd
-                                                                                                          (case [b
-                                                                                                              bd] (error)
-                                                                                                            [(lam be
-                                                                                                                (case (case [b
-                                                                                                                      [(builtin unConstrData)
-                                                                                                                        [c
-                                                                                                                          [f
-                                                                                                                            bc]]]] (con bool False)
-                                                                                                                    (con bool True)) [(builtin subtractInteger)
-                                                                                                                    [(builtin unIData)
-                                                                                                                      [c
-                                                                                                                        be]]
-                                                                                                                    (con integer 1)]
-                                                                                                                  [(builtin unIData)
-                                                                                                                    [c
-                                                                                                                      be]]))
-                                                                                                              [e
-                                                                                                                bd]]
-                                                                                                            (error)))
-                                                                                                        [(builtin unConstrData)
-                                                                                                          [c
-                                                                                                            bc]]])
+                                                                                                                                    br]]]
+                                                                                                                              bp] [(builtin constrData)
+                                                                                                                              (con integer 0)
+                                                                                                                              [bo
+                                                                                                                                bo
+                                                                                                                                bs]]
+                                                                                                                            br)]]))
+                                                                                                                  (error))))
+                                                                                                            [(builtin constrData)
+                                                                                                              (con integer 0)
+                                                                                                              bm]])
+                                                                                                        aw])
                                                                                                     [e
                                                                                                       [(builtin unConstrData)
                                                                                                         [c
-                                                                                                          [f
-                                                                                                            [e
-                                                                                                              [(builtin unConstrData)
-                                                                                                                [c
-                                                                                                                  [a
-                                                                                                                    (con integer 7)
-                                                                                                                    av]]]]]]]]]]
-                                                                                                (con (list data) [])]]]
-                                                                                          (con (list data) [])]]
-                                                                                      (con (list data) [Constr 1 []])]]]]])
-                                                                          [(builtin constrData)
-                                                                            (con integer 0)]] (error)
-                                                                        (con unit ())))
-                                                                    (case (constr 0 [(builtin unListData)
-                                                                          [c [a
-                                                                              (con integer 8)
-                                                                              av]]]
-                                                                        (con bytestring #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
-                                                                        (con string "Buyer must sign deposit")) g)])
-                                                                [e
-                                                                  [(builtin unConstrData)
-                                                                    [c n]]]]))
+                                                                                                          p]]]]]]]]]]]]]]])
+                                                                          [(builtin unListData)
+                                                                            [c
+                                                                              av]]])
+                                                                      [e
+                                                                        [(builtin unConstrData)
+                                                                          [c
+                                                                            m]]]])
+                                                                  (case (case at [as
+                                                                        (con integer 2)]
+                                                                      (con bool True)) (error)
+                                                                    (con unit ()))])
+                                                              [as
+                                                                (con integer 1)]])
                                                           [(builtin equalsInteger)
                                                             [(builtin unIData)
-                                                              [c [f n]]]]]
+                                                              [c [f m]]]]]
                                                         (error) (error) (error)
-                                                        (error)))
-                                                    [(builtin unConstrData) [c
-                                                        [o n]]]]) [a
-                                                  (con integer 2)]]) [e
-                                              [(builtin unConstrData) m]]]))
-                                      (lam bf
-                                        (case bf (lam bg
-                                            (lam bh (con bool False)))
-                                          (con bool True)))]) (lam bi
-                                    [c [f (case [c [(builtin unMapData) [c [f
-                                                  (case [c [(builtin unMapData)
-                                                        bi]] (lam bj
-                                                      (lam bk
-                                                        [d bj [d bk
-                                                            (con (list data) [])]])))]]]] (lam bl
-                                            (lam bm
-                                              [d bl [d bm
-                                                  (con (list data) [])]])))]])])
-                              (lam bn
-                                (lam bo
-                                  (lam bp
-                                    (case (constr 0 (lam bq
-                                          (lam br
-                                            (lam bs
-                                              (case br (lam bt
-                                                  (lam bu
-                                                    (case (constr 0 bq bu [bp bs
-                                                          bt]) bq))) bs)))) bn
-                                        bo) (lam bv [bv bv])))))]) (lam bw
-                            (lam bx
-                              [(lam by [by by]) (lam bz
-                                  [(lam ca
-                                      (lam cb
-                                        (case cb (lam cc
-                                            (lam cd
-                                              [e [(builtin unConstrData)
-                                                  (case [(builtin equalsData) [c
-                                                        [e
-                                                          [(builtin unConstrData)
-                                                            cc]]]
-                                                      ca] [(builtin constrData)
-                                                      (con integer 0) [bz bz
-                                                        cd]] cc)]])) (error))))
-                                    [(builtin constrData) (con integer 0) bx]])
-                                bw]))]) (lam ce
-                        (lam cf
-                          [(lam cg [cg cg]) (lam ch
-                              (lam ci
-                                (case ci (lam cj
-                                    (lam ck
-                                      [(builtin listData) [(lam cl
-                                            (case [(builtin equalsData) [c [e
-                                                    [(builtin unConstrData) [c
-                                                        [e
-                                                          [(builtin unConstrData)
-                                                            cj]]]]]] cf] cl [d
-                                                cj cl])) [(builtin unListData)
-                                            [ch ch ck]]]]))
-                                  (con data (List []))))) ce]))]) (lam cm
-                    (lam cn
-                      [(lam co
-                          (lam cp
-                            [(lam cq [cq cq]) (lam cr
-                                (lam cs
-                                  (case cs (lam ct
-                                      (lam cu
-                                        (case [(builtin equalsData) ct co] [cr
-                                            cr cu] (con unit ())))) (error))))
-                              cm])) [(builtin bData) cn]]))]))))))))
+                                                        (error))) [e o]])
+                                                [(builtin unConstrData) [c [n
+                                                      m]]]]) [a
+                                              (con integer 2)]]) [e
+                                          [(builtin unConstrData) l]]])) (lam bt
+                                    (lam bu
+                                      [(lam bv
+                                          (case (constr 0 bt (con data (I 0))
+                                              (lam bw
+                                                [(lam bx
+                                                    (lam by
+                                                      [(builtin iData) [(lam bz
+                                                            (case [(builtin equalsData)
+                                                                [c [e
+                                                                    [(builtin unConstrData)
+                                                                      [c bz]]]]
+                                                                bv] bx
+                                                              [(builtin addInteger)
+                                                                bx
+                                                                [(builtin unIData)
+                                                                  [i [c [f
+                                                                        bz]]]]]))
+                                                          [e
+                                                            [(builtin unConstrData)
+                                                              by]]]]))
+                                                  [(builtin unIData) bw]])) j))
+                                        [(builtin constrData) (con integer 0) [d
+                                            [(builtin bData) bu]
+                                            (con (list data) [])]]]))]) (lam ca
+                                (lam cb
+                                  (lam cc
+                                    (case (constr 0 (lam cd
+                                          (lam ce
+                                            (lam cf
+                                              (case ce (lam cg
+                                                  (lam ch
+                                                    (case (constr 0 cd ch [cc cf
+                                                          cg]) cd))) cf)))) ca
+                                        cb) (lam ci [ci ci])))))]) (lam cj
+                            [c [f (case [c [(builtin unMapData) [c [f (case [c
+                                              [(builtin unMapData) cj]] (lam ck
+                                              (lam cl
+                                                [d ck [d cl
+                                                    (con (list data) [])]])))]]]] (lam cm
+                                    (lam cn
+                                      [d cm [d cn (con (list data) [])]])))]])])
+                      (lam co
+                        (lam cp
+                          [(lam cq
+                              (lam cr
+                                [(lam cs
+                                    (case [b cs] (case [(lam ct [ct ct]) (lam cu
+                                            (lam cv
+                                              (case cv (lam cw
+                                                  (lam cx
+                                                    [d [(builtin constrData)
+                                                        (con integer 0)
+                                                        (case cw (lam cy
+                                                            (lam cz
+                                                              [d cy [d cz
+                                                                  (con (list data) [])]])))]
+                                                      [cu cu cx]]))
+                                                (con (list data) []))))
+                                          [(builtin unMapData) [c [e
+                                                cs]]]] (lam da
+                                          (lam db
+                                            (case db (lam dc
+                                                (lam dd (con bool False)))
+                                              [(lam de
+                                                  (case [(builtin equalsByteString)
+                                                      [(builtin unBData) [c de]]
+                                                      (con bytestring #657363726f77)] (con bool False)
+                                                    [(builtin equalsInteger)
+                                                      [(builtin unIData) [c [f
+                                                            de]]] cr])) [e
+                                                  [(builtin unConstrData)
+                                                    da]]]))) (con bool False))
+                                      (con bool False))) [(builtin unConstrData)
+                                    [(lam df [df df]) (lam dg
+                                        (lam dh
+                                          (case dh (lam di
+                                              (lam dj
+                                                (case di (lam dk
+                                                    (lam dl
+                                                      (case [(lam dm
+                                                            (lam dn
+                                                              [(lam do
+                                                                  (case [(builtin lessThanByteString)
+                                                                      dm
+                                                                      do] (case [(builtin equalsByteString)
+                                                                        dm
+                                                                        do] (constr 2)
+                                                                      (constr 1))
+                                                                    (constr 0)))
+                                                                [(builtin unBData)
+                                                                  dn]]))
+                                                          [(builtin unBData) cq]
+                                                          dk] (con data (Constr 1 []))
+                                                        [(builtin constrData)
+                                                          (con integer 0) [d dl
+                                                            (con (list data) [])]]
+                                                        [dg dg dj]))))))
+                                            (con data (Constr 1 [])))))
+                                      [(builtin unMapData) co]]]]))
+                            [(builtin bData) cp]]))]) (lam dp
+                    (lam dq
+                      [(lam dr
+                          (lam ds
+                            [(lam dt [dt dt]) (lam du
+                                (lam dv
+                                  (case dv (lam dw
+                                      (lam dx
+                                        (case [(builtin equalsData) dw dr] [du
+                                            du dx] (con unit ())))) (error))))
+                              dp])) [(builtin bData) dq]]))]))))))))
