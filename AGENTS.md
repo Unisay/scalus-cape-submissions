@@ -16,6 +16,18 @@ This repository contains UPLC-CAPE benchmark submissions implemented using Scalu
 
 **Non-standard sbt layout:** `Compile / scalaSource` is set to `baseDirectory.value / "src"` in `build.sbt`, so sources live directly under `src/<scenario_name>/` (not `src/main/scala/...`).
 
+## Branch model
+
+Each compiler version has one long-lived `scalus-<version>` branch. `main`
+follows the newest compiler, currently Scalus 1.3.0. Every source commit pinned
+by a CAPE submission must be reachable from its compiler-version branch; do not
+leave submission pins only on side branches.
+
+Merge changes into compiler-version branches with merge commits. Do not squash,
+rebase or force-push their history: CAPE pins must remain reachable. A version
+branch may fast-forward to `main` while both use the same compiler. Preserve
+historical compiler versions, build options and output conventions.
+
 ## Development Environment
 
 Use Nix flakes for reproducible environment:
